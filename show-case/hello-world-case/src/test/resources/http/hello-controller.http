@@ -1,0 +1,5 @@
+GET http://localhost:8080/hello/index
+Accept: application/json
+Authorization: Basic dXNlcjo1ZDFmZWYzZi04YzA0LTQ2YzQtODJiMS1lMGI2ZGIzM2ViMDk=
+
+
