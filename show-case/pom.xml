@@ -23,6 +23,7 @@
 
     <modules>
         <module>hello-world-case</module>
+        <module>logging-show-case</module>
     </modules>
 
 

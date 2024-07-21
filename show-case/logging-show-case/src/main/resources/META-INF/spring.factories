@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  om.yicj.study.component.AppenderBuilder,\
+  om.yicj.study.component.LoggerBuilder,\
+  om.yicj.study.component.LoggerLoad,\
+  om.yicj.study.component.LogAspect,\
+  om.yicj.study.config.LogConfig
