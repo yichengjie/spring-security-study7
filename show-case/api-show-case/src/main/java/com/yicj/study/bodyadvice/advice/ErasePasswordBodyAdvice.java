@@ -23,6 +23,9 @@ public class ErasePasswordBodyAdvice implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         // 如果返回结果
         Method method = returnType.getMethod();
+        if (method == null){
+            return false;
+        }
         // 获取类中是否有 ErasePasswordAnno 注解
         boolean presentController = method.isAnnotationPresent(ErasePasswordAnno.class);
         // 获取类中是否有RestController注解
