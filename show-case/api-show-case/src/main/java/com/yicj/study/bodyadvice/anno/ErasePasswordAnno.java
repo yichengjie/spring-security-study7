@@ -1,9 +1,7 @@
 package com.yicj.study.bodyadvice.anno;
 
-import com.yicj.study.bodyadvice.func.ValueFunction;
 import org.springframework.stereotype.Indexed;
 import java.lang.annotation.*;
-import java.util.function.Function;
 
 /**
  * <p>
