@@ -24,6 +24,7 @@
     <modules>
         <module>hello-world-case</module>
         <module>logging-show-case</module>
+        <module>api-show-case</module>
     </modules>
 
 
