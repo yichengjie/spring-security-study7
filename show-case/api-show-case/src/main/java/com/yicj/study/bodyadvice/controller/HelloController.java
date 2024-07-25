@@ -58,4 +58,16 @@ public class HelloController {
         return ResultEntity.success(basicUserList);
     }
 
+
+    @ErasePasswordAnno
+    @GetMapping("/null")
+    public ResultEntity testNull() {
+        return null ;
+    }
+
+    @ErasePasswordAnno
+    @GetMapping("/void")
+    public void testVoid() {
+
+    }
 }
