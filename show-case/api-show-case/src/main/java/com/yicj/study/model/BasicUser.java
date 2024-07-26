@@ -1,4 +1,4 @@
-package com.yicj.study.bodyadvice.model;
+package com.yicj.study.model;
 
 import lombok.Data;
 

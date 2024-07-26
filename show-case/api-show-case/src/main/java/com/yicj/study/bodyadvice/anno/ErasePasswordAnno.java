@@ -11,10 +11,12 @@ import java.lang.annotation.*;
  * @author yicj
  * @since 2024年07月25日 15:43
  */
-@Target(ElementType.METHOD)
+@Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Indexed
 public @interface ErasePasswordAnno {
+
+    String value() default "" ;
 
 }
