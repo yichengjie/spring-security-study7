@@ -2,7 +2,7 @@ package com.yicj.study.controller;
 
 import com.github.pagehelper.Page;
 import com.yicj.study.bodyadvice.anno.ErasePasswordAnno;
-import com.yicj.study.bodyadvice.anno.PageErasePasswordAnno;
+import com.yicj.study.bodyadvice.anno.MapErasePasswordAnno;
 import com.yicj.study.model.ResultEntity;
 import com.yicj.study.model.BasicUser;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +30,7 @@ public class HelloController {
         return ResultEntity.success(basicUser);
     }
 
-    @PageErasePasswordAnno
+    @MapErasePasswordAnno
     @GetMapping("/listForPage")
     public ResultEntity findPage() {
         Page<BasicUser> basicUserPage = new Page<>(1, 10, true);

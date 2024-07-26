@@ -6,14 +6,14 @@ import java.util.Map;
 
 /**
  * <p>
- * PageValueExtractor
+ * MapValueExtractor
  * </p>
  *
  * @author yicj
  * @since 2024年07月26日 10:23
  */
-@Component("pageValueExtractor")
-public class PageValueExtractor implements ValueExtractor<Map<String,Object>> {
+@Component("mapValueExtractor")
+public class MapValueExtractor implements ValueExtractor<Map<String,Object>> {
 
     @Override
     public Object extract(Map<String, Object> data) {

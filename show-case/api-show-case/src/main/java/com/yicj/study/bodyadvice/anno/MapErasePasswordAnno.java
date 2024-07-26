@@ -15,8 +15,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @ErasePasswordAnno
-public @interface PageErasePasswordAnno {
+public @interface MapErasePasswordAnno {
 
     @AliasFor(annotation = ErasePasswordAnno.class)
-    String value() default "pageValueExtractor" ;
+    String value() default "mapValueExtractor" ;
 }

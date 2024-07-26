@@ -1,7 +1,7 @@
 package com.yicj.study.bodyadvice.advice;
 
 import com.yicj.study.bodyadvice.anno.ErasePasswordAnno;
-import com.yicj.study.bodyadvice.anno.PageErasePasswordAnno;
+import com.yicj.study.bodyadvice.anno.MapErasePasswordAnno;
 import com.yicj.study.bodyadvice.extractor.ValueExtractorManager;
 import com.yicj.study.model.BasicUser;
 import com.yicj.study.model.ResultEntity;
@@ -15,7 +15,6 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import reactor.core.publisher.Mono;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -32,7 +31,7 @@ public class ErasePasswordBodyAdvice implements ResponseBodyAdvice<Object> {
             return false;
         }
         // 获取类中是否有 ErasePasswordAnno 注解
-        boolean presentController = method.isAnnotationPresent(ErasePasswordAnno.class) || method.isAnnotationPresent(PageErasePasswordAnno.class);
+        boolean presentController = method.isAnnotationPresent(ErasePasswordAnno.class) || method.isAnnotationPresent(MapErasePasswordAnno.class);
         // 获取类中是否有RestController注解
         boolean restController = returnType.getDeclaringClass().isAnnotationPresent(RestController.class);
         // 支持修改结果
@@ -69,7 +68,7 @@ public class ErasePasswordBodyAdvice implements ResponseBodyAdvice<Object> {
                 .filter(StringUtils::isNotBlank)
                 .map(String::trim)
                 .orElseGet(()->{
-                    PageErasePasswordAnno pageErasePasswordAnno = method.getAnnotation(PageErasePasswordAnno.class);
+                    MapErasePasswordAnno pageErasePasswordAnno = method.getAnnotation(MapErasePasswordAnno.class);
                     return pageErasePasswordAnno != null ? pageErasePasswordAnno.value() : null ;
                 });
     }
