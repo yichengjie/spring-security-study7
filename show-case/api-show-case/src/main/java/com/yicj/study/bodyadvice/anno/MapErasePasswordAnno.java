@@ -17,6 +17,6 @@ import java.lang.annotation.*;
 @ErasePasswordAnno
 public @interface MapErasePasswordAnno {
 
-    @AliasFor(annotation = ErasePasswordAnno.class)
+    @AliasFor(annotation = ErasePasswordAnno.class, attribute = "value")
     String value() default "mapValueExtractor" ;
 }
