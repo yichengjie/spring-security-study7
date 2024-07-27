@@ -74,7 +74,7 @@ public class ErasePasswordBodyAdvice implements ResponseBodyAdvice<Object> {
     }
 
     private void erasePassword(Object data){
-        if (data instanceof Iterator<?>){
+        if (data instanceof Collection<?>){
             for (Object item : (Iterable<?>) data){
                 this.doErasePassword(item);
             }

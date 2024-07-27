@@ -5,6 +5,7 @@ import com.yicj.study.bodyadvice.anno.ErasePasswordAnno;
 import com.yicj.study.bodyadvice.anno.MapErasePasswordAnno;
 import com.yicj.study.model.ResultEntity;
 import com.yicj.study.model.BasicUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @author yicj
  * @since 2024年07月25日 15:22
  */
+@Slf4j
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
@@ -27,7 +29,9 @@ public class HelloController {
         basicUser.setId(id);
         basicUser.setName("yicj");
         basicUser.setPassword("123456");
-        return ResultEntity.success(basicUser);
+        ResultEntity value = ResultEntity.success(basicUser);
+        log.info("value : {}", value);
+        return value ;
     }
 
     @MapErasePasswordAnno
@@ -44,7 +48,9 @@ public class HelloController {
         //
         basicUserPage.add(basicUser);
         //
-        return ResultEntity.success(basicUserPage);
+        ResultEntity value = ResultEntity.success(basicUserPage);
+        log.info("value : {}", value);
+        return value ;
     }
 
     @ErasePasswordAnno
@@ -56,7 +62,9 @@ public class HelloController {
         basicUser.setPassword("123456");
         //
         List<BasicUser> basicUserList = List.of(basicUser) ;
-        return ResultEntity.success(basicUserList);
+        ResultEntity value = ResultEntity.success(basicUserList);
+        log.info("value : {}", value);
+        return value ;
     }
 
 

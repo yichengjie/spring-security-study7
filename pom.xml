@@ -12,6 +12,7 @@
 
     <modules>
         <module>show-case</module>
+        <module>show-core</module>
     </modules>
 
     <parent>

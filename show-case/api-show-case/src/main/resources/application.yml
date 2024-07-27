@@ -1,13 +1,12 @@
-spring:
-  application:
-    name: logstash-show-case
-  profiles:
-    active: dev
+# tomcat config
 server:
   port: 8080
-logging:
-  level:
-    root: debug
+# spring config
+spring:
+  application:
+    name: api-show-case
+  profiles:
+    active: dev
 ### sss logstash config
 sss:
   logstash:

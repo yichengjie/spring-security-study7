@@ -1,6 +1,7 @@
-package com.yicj.study.properties;
+package com.yicj.study.logstash.properties;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import lombok.Data;
  * @since 2024年07月27日 10:55
  */
 @Data
+@ConfigurationProperties(prefix = "sss.logstash")
 public class LogstashProperties {
 
     private String host ;

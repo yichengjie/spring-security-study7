@@ -1,4 +1,4 @@
-package com.yicj.study.config;
+package com.yicj.study.logstash.config;
 
 import ch.qos.logback.classic.AsyncAppender;
 import ch.qos.logback.classic.LoggerContext;
@@ -6,8 +6,7 @@ import ch.qos.logback.core.net.ssl.KeyStoreFactoryBean;
 import ch.qos.logback.core.net.ssl.SSLConfiguration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yicj.study.properties.AppProperties;
-import com.yicj.study.properties.LogstashProperties;
+import com.yicj.study.logstash.properties.LogstashProperties;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
 import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
@@ -16,43 +15,50 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * <p>
  * LoggingConfiguration
  * </p>
- *
  * @author yicj
  * @since 2024年07月27日 10:45
  */
-@Configuration
-public class LogstashConfig implements InitializingBean {
+@Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties({LogstashProperties.class})
+public class LogstashConfig implements InitializingBean, EnvironmentAware {
+    private final Logger log = LoggerFactory.getLogger(LogstashConfig.class);
 
-    private static final Logger log = LoggerFactory.getLogger(LogstashConfig.class);
-
+    private Environment env ;
     @Autowired
-    private AppProperties appProperties ;
+    private LogstashProperties logstashProperties ;
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        this.init(this.appProperties);
+        String appEnv = Optional.ofNullable(env.getProperty("spring.profiles.active")).orElse("dev") ;
+        String appName = Optional.ofNullable(env.getProperty("spring.application.name")).orElse("unknown") ;
+        String appPort = Optional.ofNullable(env.getProperty("server.port")).orElse("8080") ;
+        this.init(appEnv, appName, appPort);
     }
 
-    private void init(AppProperties appProperties) throws JsonProcessingException {
-        LogstashProperties logstash = appProperties.getLogstash();
-        if (!logstash.isEnabled() || StringUtils.isBlank(logstash.getHost())) {
+    private void init(String appEnv, String appName, String appPort) throws JsonProcessingException {
+        if (!logstashProperties.isEnabled() || StringUtils.isBlank(logstashProperties.getHost())) {
             log.info("[LogstashConfig] Stash log disabled.");
             return;
         }
-        ch.qos.logback.classic.Logger rootLogger = (ch.qos.logback.classic.Logger)LoggerFactory.getLogger("ROOT");
-        LoggerContext loggerContext = rootLogger.getLoggerContext();
+        //ch.qos.logback.classic.Logger rootLogger = (ch.qos.logback.classic.Logger)LoggerFactory.getLogger("ROOT");
+        //LoggerContext loggerContext = rootLogger.getLoggerContext();
+        LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory() ;
         Map<String, String> map = new HashMap<>();
-        map.put("app_env", appProperties.getProfileActive());
-        map.put("app_name", appProperties.getAppName());
-        map.put("app_port", appProperties.getServerPort());
+        map.put("app_env", appEnv) ;
+        map.put("app_name", appName) ;
+        map.put("app_port", appPort) ;
         String customFields = new ObjectMapper().writeValueAsString(map);
         LogstashEncoder logstashEncoder = new LogstashEncoder();
         logstashEncoder.setCustomFields(customFields);
@@ -62,19 +68,19 @@ public class LogstashConfig implements InitializingBean {
         logstashEncoder.setContext(loggerContext);
         logstashEncoder.setIncludeCallerData(true);
         SSLConfiguration sslConfiguration = null;
-        if (StringUtils.isNotBlank(logstash.getTrustStoreLocation())) {
+        if (StringUtils.isNotBlank(logstashProperties.getTrustStoreLocation())) {
             sslConfiguration = new SSLConfiguration();
             KeyStoreFactoryBean factory = new KeyStoreFactoryBean();
-            factory.setLocation(logstash.getTrustStoreLocation());
-            if (logstash.getTrustStorePassword() != null) {
-                factory.setPassword(logstash.getTrustStorePassword());
+            factory.setLocation(logstashProperties.getTrustStoreLocation());
+            if (logstashProperties.getTrustStorePassword() != null) {
+                factory.setPassword(logstashProperties.getTrustStorePassword());
             }
             sslConfiguration.setTrustStore(factory);
         }
         LogstashTcpSocketAppender logstashTcpSocketAppender = new LogstashTcpSocketAppender();
         logstashTcpSocketAppender.setName("LOGSTASH");
         logstashTcpSocketAppender.setContext(loggerContext);
-        logstashTcpSocketAppender.addDestination(logstash.getHost() + ":" + logstash.getPort());
+        logstashTcpSocketAppender.addDestination(logstashProperties.getHost() + ":" + logstashProperties.getPort());
         logstashTcpSocketAppender.setEncoder(logstashEncoder);
         logstashTcpSocketAppender.setIncludeCallerData(true);
         if (sslConfiguration != null) {
@@ -84,12 +90,17 @@ public class LogstashConfig implements InitializingBean {
         AsyncAppender asyncLogstashAppender = new AsyncAppender();
         asyncLogstashAppender.setContext(loggerContext);
         asyncLogstashAppender.setName("ASYNC_LOGSTASH");
-        asyncLogstashAppender.setQueueSize(logstash.getQueueSize());
+        asyncLogstashAppender.setQueueSize(logstashProperties.getQueueSize());
         asyncLogstashAppender.addAppender(logstashTcpSocketAppender);
         asyncLogstashAppender.setIncludeCallerData(true);
         asyncLogstashAppender.start();
-        rootLogger.addAppender(asyncLogstashAppender);
+        loggerContext.getLogger("ROOT").addAppender(asyncLogstashAppender);
         log.info("[LogstashConfig] Stash log init done.");
     }
 
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.env = environment ;
+    }
 }
