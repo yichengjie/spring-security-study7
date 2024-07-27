@@ -77,16 +77,7 @@ public class LogstashConfig implements InitializingBean, EnvironmentAware {
             }
             sslConfiguration.setTrustStore(factory);
         }
-        LogstashTcpSocketAppender logstashTcpSocketAppender = new LogstashTcpSocketAppender();
-        logstashTcpSocketAppender.setName("LOGSTASH");
-        logstashTcpSocketAppender.setContext(loggerContext);
-        logstashTcpSocketAppender.addDestination(logstashProperties.getHost() + ":" + logstashProperties.getPort());
-        logstashTcpSocketAppender.setEncoder(logstashEncoder);
-        logstashTcpSocketAppender.setIncludeCallerData(true);
-        if (sslConfiguration != null) {
-            logstashTcpSocketAppender.setSsl(sslConfiguration);
-        }
-        logstashTcpSocketAppender.start();
+        LogstashTcpSocketAppender logstashTcpSocketAppender = getLogstashTcpSocketAppender(loggerContext, logstashEncoder, sslConfiguration);
         AsyncAppender asyncLogstashAppender = new AsyncAppender();
         asyncLogstashAppender.setContext(loggerContext);
         asyncLogstashAppender.setName("ASYNC_LOGSTASH");
@@ -98,6 +89,20 @@ public class LogstashConfig implements InitializingBean, EnvironmentAware {
         log.info("[LogstashConfig] Stash log init done.");
     }
 
+    private LogstashTcpSocketAppender getLogstashTcpSocketAppender(
+            LoggerContext loggerContext, LogstashEncoder logstashEncoder, SSLConfiguration sslConfiguration) {
+        LogstashTcpSocketAppender logstashTcpSocketAppender = new LogstashTcpSocketAppender();
+        logstashTcpSocketAppender.setName("LOGSTASH");
+        logstashTcpSocketAppender.setContext(loggerContext);
+        logstashTcpSocketAppender.addDestination(logstashProperties.getHost() + ":" + logstashProperties.getPort());
+        logstashTcpSocketAppender.setEncoder(logstashEncoder);
+        logstashTcpSocketAppender.setIncludeCallerData(true);
+        if (sslConfiguration != null) {
+            logstashTcpSocketAppender.setSsl(sslConfiguration);
+        }
+        logstashTcpSocketAppender.start();
+        return logstashTcpSocketAppender;
+    }
 
     @Override
     public void setEnvironment(Environment environment) {
