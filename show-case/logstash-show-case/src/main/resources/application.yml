@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: logstash-show-case
+  profiles:
+    active: dev
+server:
+  port: 8080
+### app custom config
+app:
+  logstash:
+    enabled: true
+    host: 127.0.0.1
+    port: 8888
+    queueSize: 512
+    network-interface: eth0
+logging:
+  level:
+    root: debug
