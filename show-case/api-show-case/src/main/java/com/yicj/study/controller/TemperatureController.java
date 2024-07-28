@@ -5,6 +5,9 @@ import com.yicj.study.rxjava.TemperatureSender;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+import reactor.core.publisher.Mono;
+import rx.Observable;
+import rx.Single;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,5 +33,16 @@ public class TemperatureController {
         RxSeeEmitter emitter = new RxSeeEmitter() ;
         temperatureSender.temperatureStream().subscribe(emitter.getSubscriber());
         return emitter ;
+    }
+
+    @GetMapping(value = "/temperature/rxjava")
+    public Single<String> rxjava(){
+        return Single.just("hello") ;
+    }
+
+
+    @GetMapping("/temperature/reactor")
+    public Mono<String> reactor(){
+        return Mono.just("hello") ;
     }
 }

@@ -2,6 +2,7 @@ package com.yicj.study.rxjava;
 
 import com.yicj.study.model.Temperature;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import rx.Subscriber;
 
@@ -13,6 +14,7 @@ import rx.Subscriber;
  * @author yicj
  * @since 2024年07月28日 19:37
  */
+@Slf4j
 @Getter
 public class RxSeeEmitter extends SseEmitter {
 
@@ -24,6 +26,7 @@ public class RxSeeEmitter extends SseEmitter {
         this.subscriber = new Subscriber<>() {
             @Override
             public void onNext(Temperature temperature) {
+                log.info("send temperature : {}", temperature);
                 try {
                     RxSeeEmitter.this.send(temperature);
                 }catch (Exception ex){
