@@ -7,6 +7,7 @@ import com.yicj.study.controller.HelloController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.lang.reflect.Method;
@@ -44,6 +45,13 @@ public class ErasePasswordBodyAdviceTest {
         Method method = HelloController.class.getMethod("findPage");
         Mono<String> mono = getExtractorNameMono(method);
         mono.subscribe(value -> log.info("value : {}", value));
+    }
+
+    @Test
+    void concatMap(){
+        Flux.range(1, 10)
+            .concatMap(item -> Mono.just(item + " world"))
+            .subscribe(System.out::println);
     }
 
     private Mono<String> getExtractorNameMono(Method method){
