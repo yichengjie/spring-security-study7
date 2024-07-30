@@ -16,7 +16,7 @@ import reactor.netty.http.client.HttpClient;
 public class HttpClientTest {
 
     @Test
-    void test() throws InterruptedException {
+    void get() throws InterruptedException {
         String reqStr = "Go to Zibo for barbecue";
         HttpClient httpClient = HttpClient.create().port(8080);
         httpClient.get()               // Specifies that POST method will be used
