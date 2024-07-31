@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class LogAnalysisTest {
     @Test
     void test() throws IOException {
         String fullFilePath = "D:\\1111\\quote\\multi-thread.txt" ;
-        Files.lines(Path.of(fullFilePath)).forEach(line -> {
+        Files.lines(Paths.get(fullFilePath)).forEach(line -> {
             if (line.contains("====> taskInfo :")) {
                 System.out.println(line);
             }
