@@ -2,6 +2,7 @@ package com.yicj.study.model.builder;
 
 import com.yicj.study.model.Inventor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 public class InventorBuilder {
 
     private String name;
-    private List<Boolean> booleans;
+    private List<Boolean> booleans = new ArrayList<>();
 
     public InventorBuilder name(String name) {
         this.name = name;

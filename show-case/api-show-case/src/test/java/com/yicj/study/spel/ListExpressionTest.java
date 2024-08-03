@@ -19,7 +19,7 @@ import java.util.List;
  * @author yicj
  * @since 2024年08月03日 21:10
  */
-public class ListExpression {
+public class ListExpressionTest {
 
     @Test
     void hello(){

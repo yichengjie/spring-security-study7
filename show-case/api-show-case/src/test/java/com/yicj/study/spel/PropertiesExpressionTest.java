@@ -18,7 +18,7 @@ import java.util.Arrays;
  * @author yicj
  * @since 2024年08月03日 20:43
  */
-public class PropertiesExpression {
+public class PropertiesExpressionTest {
 
     @Test
     void hello(){

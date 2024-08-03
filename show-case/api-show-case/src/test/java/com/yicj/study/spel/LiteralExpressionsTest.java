@@ -6,7 +6,7 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 @Slf4j
-public class LiteralExpressions {
+public class LiteralExpressionsTest {
 
     @Test
     void hello(){

@@ -22,7 +22,7 @@ import java.util.List;
  * @since 2024年08月03日 20:52
  */
 @Slf4j
-public class ArraysExpression {
+public class ArraysExpressionTest {
 
     @Test
     void test1(){
