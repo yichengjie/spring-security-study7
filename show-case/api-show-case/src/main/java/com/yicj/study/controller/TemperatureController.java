@@ -6,10 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import reactor.core.publisher.Mono;
-import rx.Observable;
 import rx.Single;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -29,7 +27,7 @@ public class TemperatureController {
     }
 
     @GetMapping("/temperature/stream")
-    public SseEmitter events(HttpServletRequest request){
+    public SseEmitter events(){
         RxSeeEmitter emitter = new RxSeeEmitter() ;
         temperatureSender.temperatureStream().subscribe(emitter.getSubscriber());
         return emitter ;

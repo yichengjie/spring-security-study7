@@ -1,10 +1,12 @@
 package com.yicj.study.component;
 
+import cn.hutool.extra.servlet.JakartaServletUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.json.JSONUtil;
 import com.yicj.study.enums.LogAction;
 import com.yicj.study.enums.XiaoBaWangLog;
 import com.yicj.study.model.SysLog;
+import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -14,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -51,7 +51,7 @@ public class LogAspect {
         //获取请求的request
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        String clientIP = ServletUtil.getClientIP(request, null);
+        String clientIP = JakartaServletUtil.getClientIP(request);
         if ("0.0.0.0".equals(clientIP) || "0:0:0:0:0:0:0:1".equals(clientIP) || "localhost".equals(clientIP) || "127.0.0.1".equals(clientIP)) {
             clientIP = "127.0.0.1";
         }
