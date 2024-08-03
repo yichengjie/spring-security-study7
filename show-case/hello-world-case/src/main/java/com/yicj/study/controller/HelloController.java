@@ -34,10 +34,12 @@ public class HelloController {
         return "hello world" ;
     }
 
-//    public static void main(String[] args) {
-//        PasswordEncoder encoder = NoOpPasswordEncoder.getInstance() ;
-//        String encode = encoder.encode("123456") ;
-//        System.out.println("encode : " + encode);
-//    }
+    @GetMapping("/other")
+    public String other(){
+        String beanName = "org.springframework.security.config.annotation.web.configuration.HttpSecurityConfiguration.httpSecurity" ;
+        HttpSecurity bean = context.getBean(beanName, HttpSecurity.class);
+        log.info("bean : {}", bean);
+        return "hello other" ;
+    }
 
 }

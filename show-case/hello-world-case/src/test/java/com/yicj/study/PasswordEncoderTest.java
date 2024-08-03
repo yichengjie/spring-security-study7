@@ -30,7 +30,9 @@ class PasswordEncoderTest {
 
     @Test
     void test2(){
-        PasswordEncoder encoder = new Pbkdf2PasswordEncoder() ;
+        PasswordEncoder encoder = new Pbkdf2PasswordEncoder(
+                "secret", 185000, 256,
+                Pbkdf2PasswordEncoder.SecretKeyFactoryAlgorithm.PBKDF2WithHmacSHA1) ;
         String encode = encoder.encode("123456") ;
         log.info("encode : {}", encode);
     }

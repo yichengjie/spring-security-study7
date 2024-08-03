@@ -5,16 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.yicj.study</groupId>
-        <artifactId>spring-security-study7</artifactId>
+        <artifactId>show-core</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>show-core</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>sss-logstash-starter</module>
-        <module>sss-security-mvc</module>
-    </modules>
+    <artifactId>sss-security-mvc</artifactId>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
