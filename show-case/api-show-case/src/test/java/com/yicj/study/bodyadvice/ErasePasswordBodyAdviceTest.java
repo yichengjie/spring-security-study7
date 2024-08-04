@@ -2,7 +2,6 @@ package com.yicj.study.bodyadvice;
 
 
 import com.yicj.study.bodyadvice.anno.ErasePasswordAnno;
-import com.yicj.study.bodyadvice.anno.MapErasePasswordAnno;
 import com.yicj.study.controller.HelloController;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -69,9 +68,9 @@ public class ErasePasswordBodyAdviceTest {
     }
 
     private Mono<String> monoForMapErasePasswordAnno(Method method){
-        return  Mono.just(method).filter(item -> item.isAnnotationPresent(MapErasePasswordAnno.class))
-                .map(item -> item.getAnnotation(MapErasePasswordAnno.class))
-                .map(MapErasePasswordAnno::value)
+        return  Mono.just(method).filter(item -> item.isAnnotationPresent(ErasePasswordAnno.class))
+                .map(item -> item.getAnnotation(ErasePasswordAnno.class))
+                .map(ErasePasswordAnno::value)
                 .filter(StringUtils::isNotBlank) ;
     }
 
@@ -82,7 +81,7 @@ public class ErasePasswordBodyAdviceTest {
                 .filter(StringUtils::isNotBlank)
                 .map(String::trim)
                 .orElseGet(() -> {
-                    MapErasePasswordAnno pageErasePasswordAnno = method.getAnnotation(MapErasePasswordAnno.class);
+                    ErasePasswordAnno pageErasePasswordAnno = method.getAnnotation(ErasePasswordAnno.class);
                     return pageErasePasswordAnno != null ? pageErasePasswordAnno.value() : null;
                 });
     }

@@ -16,11 +16,8 @@ import java.util.HashMap;
 @Data
 public class ResultEntity<T> implements Serializable {
     private Integer code;
-
     private String msg;
-
     private T data;
-
     public ResultEntity() {
     }
 
@@ -36,12 +33,12 @@ public class ResultEntity<T> implements Serializable {
     }
 
 
-    public static ResultEntity success(Object object) {
-        ResultEntity resultEntity = new ResultEntity();
+    public static ResultEntity<Object> success(Object object) {
+        ResultEntity<Object> resultEntity = new ResultEntity<>();
         resultEntity.setCode(TeamCreamEnum.GLOBAL_SUCCESS.getCode());
         resultEntity.setMsg(TeamCreamEnum.GLOBAL_SUCCESS.getMessage());
         if (object instanceof Page) {
-            Page temp = (Page)object;
+            Page<Object> temp = (Page)object;
             HashMap<String, Object> data = new HashMap();
             data.put("curPageNo", temp.getPageNum());
             data.put("pageSize", temp.getPageSize());
@@ -55,14 +52,14 @@ public class ResultEntity<T> implements Serializable {
         return resultEntity;
     }
 
-    public static ResultEntity success() {
-        ResultEntity resultEntity = new ResultEntity();
+    public static ResultEntity<Void> success() {
+        ResultEntity<Void> resultEntity = new ResultEntity<>();
         resultEntity.setCode(TeamCreamEnum.GLOBAL_SUCCESS.getCode());
         resultEntity.setMsg(TeamCreamEnum.GLOBAL_SUCCESS.getMessage());
         return resultEntity;
     }
 
-    public static ResultEntity error(Integer errorCode, String errorMsg, Object dataObject) {
+    public static ResultEntity<?> error(Integer errorCode, String errorMsg, Object dataObject) {
         ResultEntity resultEntity = new ResultEntity();
         resultEntity.setCode(errorCode);
         resultEntity.setMsg(errorMsg);

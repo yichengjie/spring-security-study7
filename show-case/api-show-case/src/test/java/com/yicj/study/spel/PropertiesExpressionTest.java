@@ -9,6 +9,8 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -35,5 +37,22 @@ public class PropertiesExpressionTest {
         // nested property
         int length = parser.parseExpression("name.length").getValue(context, int.class);
         System.out.println(length);
+    }
+
+    @Test
+    void hello2(){
+        Inventor inventor = InventorBuilder.builder()
+                .name("markus")
+                .booleans(Arrays.asList(true, false))
+                .build();
+        Map<String, Inventor> map = new HashMap<>();
+        map.put("markus", inventor);
+        EvaluationContext context = new StandardEvaluationContext(map);
+
+        ExpressionParser parser = new SpelExpressionParser();
+        // by ['key'] get element
+        //Inventor inventorFromParser = parser.parseExpression("['markus']").getValue(context, Inventor.class);
+        Inventor inventorFromParser = parser.parseExpression("['markus']").getValue(context, Inventor.class);
+        System.out.println(inventorFromParser);
     }
 }

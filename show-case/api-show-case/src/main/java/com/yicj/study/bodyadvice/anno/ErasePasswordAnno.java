@@ -1,5 +1,6 @@
 package com.yicj.study.bodyadvice.anno;
 
+import org.springframework.core.annotation.AliasFor;
 import org.springframework.stereotype.Indexed;
 import java.lang.annotation.*;
 
@@ -14,9 +15,10 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Indexed
 public @interface ErasePasswordAnno {
-
+    @AliasFor(attribute = "expression")
     String value() default "" ;
 
+    @AliasFor(attribute = "value")
+    String expression() default "" ;
 }
