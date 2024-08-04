@@ -21,7 +21,6 @@ import org.springframework.security.web.SecurityFilterChain;
  * @author yicj
  * @since 2024年08月03日 9:21
  */
-@EnableWebSecurity
 @Configuration
 public class SecurityConfiguration {
     @Bean
