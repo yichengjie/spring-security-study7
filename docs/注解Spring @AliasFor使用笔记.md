@@ -46,17 +46,7 @@
            log.info("annotation value : {}", annotation.value());
            log.info("annotation expression : {}", annotation.value());
        }
-   
-       @Test
-       void complex2() throws NoSuchMethodException {
-           Method method = MapErasePasswordAnnoTest.class.getMethod("hello2");
-           ErasePasswordAnno annotation = AnnotationUtils.getAnnotation(method, ErasePasswordAnno.class);
-           Assertions.assertNotNull(annotation);
-           log.info("annotation value : {}", annotation.value());
-           log.info("annotation expression : {}", annotation.value());
-       }
-   
-   
+       
        @ErasePasswordAnno("username")
        public void hello(){
    
