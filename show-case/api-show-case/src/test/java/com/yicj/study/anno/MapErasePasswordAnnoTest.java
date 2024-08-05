@@ -5,6 +5,7 @@ import com.yicj.study.bodyadvice.anno.MapErasePasswordAnno;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 
 import java.lang.reflect.Method;
@@ -32,21 +33,11 @@ public class MapErasePasswordAnnoTest {
     @Test
     void complex() throws NoSuchMethodException {
         Method method = MapErasePasswordAnnoTest.class.getMethod("hello2");
-        MapErasePasswordAnno annotation = AnnotationUtils.getAnnotation(method, MapErasePasswordAnno.class);
+        ErasePasswordAnno annotation = AnnotatedElementUtils.findMergedAnnotation(method, ErasePasswordAnno.class);
         Assertions.assertNotNull(annotation);
         log.info("annotation value : {}", annotation.value());
         log.info("annotation expression : {}", annotation.value());
     }
-
-    @Test
-    void complex2() throws NoSuchMethodException {
-        Method method = MapErasePasswordAnnoTest.class.getMethod("hello2");
-        ErasePasswordAnno annotation = AnnotationUtils.getAnnotation(method, ErasePasswordAnno.class);
-        Assertions.assertNotNull(annotation);
-        log.info("annotation value : {}", annotation.value());
-        log.info("annotation expression : {}", annotation.value());
-    }
-
 
     @ErasePasswordAnno("username")
     public void hello(){

@@ -41,7 +41,7 @@
        @Test
        void complex() throws NoSuchMethodException {
            Method method = MapErasePasswordAnnoTest.class.getMethod("hello2");
-           MapErasePasswordAnno annotation = AnnotationUtils.getAnnotation(method, MapErasePasswordAnno.class);
+           ErasePasswordAnno annotation = AnnotatedElementUtils.findMergedAnnotation(method, ErasePasswordAnno.class);
            Assertions.assertNotNull(annotation);
            log.info("annotation value : {}", annotation.value());
            log.info("annotation expression : {}", annotation.value());
