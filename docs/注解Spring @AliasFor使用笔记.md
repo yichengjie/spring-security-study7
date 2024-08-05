@@ -53,7 +53,6 @@
        }
    
        @MapErasePasswordAnno
-       //@ErasePasswordAnno("username")
        public void hello2(){
    
        }
