@@ -11,19 +11,19 @@
     }
     ```
 2. 嵌套注解类
-    ```java
-    @Target({ElementType.METHOD})
-    @Retention(RetentionPolicy.RUNTIME)
-    @Documented
-    @ErasePasswordAnno
-    public @interface MapErasePasswordAnno {
-        @AliasFor(annotation = ErasePasswordAnno.class, attribute = "value")
-        String value() default "['recordList']" ;
-    
-        @AliasFor(annotation = ErasePasswordAnno.class, attribute = "expression")
-        String expression() default "mapValueExtractor" ;
-    }
-    ```
+   ```java
+   @Target({ElementType.METHOD})
+   @Retention(RetentionPolicy.RUNTIME)
+   @Documented
+   @ErasePasswordAnno
+   public @interface MapErasePasswordAnno {
+       @AliasFor(annotation = ErasePasswordAnno.class, attribute = "value")
+       String value() default "['recordList']" ;
+   
+       @AliasFor(annotation = ErasePasswordAnno.class, attribute = "expression")
+       String expression() default "['recordList']" ;
+   }
+   ```
 3. 编写测试代码
    ```java
    @Slf4j
@@ -53,7 +53,6 @@
        }
    
        @MapErasePasswordAnno
-       //@ErasePasswordAnno("username")
        public void hello2(){
    
        }
