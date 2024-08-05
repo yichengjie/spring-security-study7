@@ -27,7 +27,7 @@
 3. 编写测试代码
    ```java
    @Slf4j
-   public class MapErasePasswordAnnoTest {
+   public class AliasForAnnoTest {
    
        @Test
        void simple() throws NoSuchMethodException {

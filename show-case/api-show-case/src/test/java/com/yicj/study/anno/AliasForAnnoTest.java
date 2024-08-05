@@ -12,18 +12,18 @@ import java.lang.reflect.Method;
 
 /**
  * <p>
- * MapErasePasswordAnnoTest
+ * AliasForAnnoTest
  * </p>
  *
  * @author yicj
  * @since 2024年08月04日 21:11
  */
 @Slf4j
-public class MapErasePasswordAnnoTest {
+public class AliasForAnnoTest {
 
     @Test
     void simple() throws NoSuchMethodException {
-        Method method = MapErasePasswordAnnoTest.class.getMethod("hello");
+        Method method = AliasForAnnoTest.class.getMethod("hello");
         ErasePasswordAnno annotation = AnnotationUtils.getAnnotation(method, ErasePasswordAnno.class);
         Assertions.assertNotNull(annotation);
         log.info("annotation value : {}", annotation.value());
@@ -32,7 +32,7 @@ public class MapErasePasswordAnnoTest {
 
     @Test
     void complex() throws NoSuchMethodException {
-        Method method = MapErasePasswordAnnoTest.class.getMethod("hello2");
+        Method method = AliasForAnnoTest.class.getMethod("hello2");
         ErasePasswordAnno annotation = AnnotatedElementUtils.findMergedAnnotation(method, ErasePasswordAnno.class);
         Assertions.assertNotNull(annotation);
         log.info("annotation value : {}", annotation.value());
