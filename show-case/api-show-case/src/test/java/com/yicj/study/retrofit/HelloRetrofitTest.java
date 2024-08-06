@@ -20,6 +20,9 @@ public class HelloRetrofitTest {
                 //可以接收自定义的Gson，当然也可以不传
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
+
+        RetrofitApi retrofitApi = retrofit.create(RetrofitApi.class);
+        retrofitApi.postData(null) ;
     }
 
 
