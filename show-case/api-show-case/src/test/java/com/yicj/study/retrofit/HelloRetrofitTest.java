@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Test;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import java.io.IOException;
+
 public class HelloRetrofitTest {
 
     @Test
-    void hello(){
+    void hello() throws IOException {
         Gson gson = new GsonBuilder()
                 //配置你的Gson
                 .setDateFormat("yyyy-MM-dd hh:mm:ss")
@@ -22,7 +25,7 @@ public class HelloRetrofitTest {
                 .build();
 
         RetrofitApi retrofitApi = retrofit.create(RetrofitApi.class);
-        retrofitApi.postData(null) ;
+        retrofitApi.postData(null).execute() ;
     }
 
 
