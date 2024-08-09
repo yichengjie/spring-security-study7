@@ -64,6 +64,8 @@
             </dependency>
 
 
+
+
             <!-- <dependency>
                  <groupId>ch.qos.logback</groupId>
                  <artifactId>logback-access</artifactId>
@@ -122,6 +124,19 @@
                 <groupId>io.reactivex.rxjava3</groupId>
                 <artifactId>rxjava</artifactId>
                 <version>3.1.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>4.12.0</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>mockwebserver</artifactId>
+                <version>4.12.0</version>
             </dependency>
 
         </dependencies>
