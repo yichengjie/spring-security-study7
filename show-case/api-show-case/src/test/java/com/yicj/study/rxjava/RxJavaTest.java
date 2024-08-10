@@ -50,4 +50,23 @@ public class RxJavaTest {
             }
         }).subscribe(value -> log.info("value : {}", value)) ;
     }
+
+
+    @Test
+    void zip(){
+        Observable<String> o1 = Observable.fromCallable(() -> {
+            Thread.sleep(1000); //  imitate expensive computation
+            log.info("o1 thread : {}", Thread.currentThread().getName());
+            return "one";
+        });
+        //
+        Observable<String> o2 = Observable.fromCallable(() -> {
+            Thread.sleep(1000); //  imitate expensive computation
+            log.info("o2 thread : {}", Thread.currentThread().getName());
+            return "two";
+        });
+        //
+        Observable.zip(o1, o2, (a, b) -> a + ", " + b)
+            .subscribe(value -> log.info("value : {}", value)) ;
+    }
 }

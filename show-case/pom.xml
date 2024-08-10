@@ -26,6 +26,7 @@
         <module>logging-show-case</module>
         <module>api-show-case</module>
         <module>logstash-show-case</module>
+        <module>mybatis-show-case</module>
     </modules>
 
 
