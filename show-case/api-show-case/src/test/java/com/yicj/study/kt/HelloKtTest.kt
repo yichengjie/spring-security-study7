@@ -1,6 +1,6 @@
 package com.yicj.study.kt
 
-import com.yicj.study.javers.HelloKtService
+import com.yicj.study.kotlin.HelloKtService
 import lombok.extern.slf4j.Slf4j
 import org.junit.Test
 

@@ -1,5 +1,8 @@
-package com.yicj.study.javers
+package com.yicj.study.kotlin
 
+import org.springframework.stereotype.Service
+
+@Service
 class HelloKtService {
     fun hello(){
         println("hello")
