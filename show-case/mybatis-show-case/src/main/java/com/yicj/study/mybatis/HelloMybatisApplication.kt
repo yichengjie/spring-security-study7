@@ -1,5 +1,6 @@
 package com.yicj.study.mybatis
 
+import com.yicj.study.mybatis.model.Person
 import org.mybatis.spring.annotation.MapperScan
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

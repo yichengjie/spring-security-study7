@@ -4,6 +4,8 @@ import com.yicj.study.mybatis.CommonUtil
 import com.yicj.study.mybatis.HelloMybatisApplication
 import com.yicj.study.mybatis.entity.AccountInfo
 import com.yicj.study.mybatis.entity.UserInfo
+import com.yicj.study.mybatis.model.Person
+import com.yicj.study.mybatis.model.Student
 import lombok.extern.slf4j.Slf4j
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -33,6 +35,14 @@ class UserInfoServiceTest {
         val user = this.initUser(userId)
         val account = this.initAccount(userId)
         userInfoService!!.saveUserAndAccount(user, account)
+    }
+
+    @Test
+    fun hello(){
+        val person: Person = Student("123", 12, "123")
+        person.age = 13
+        person.name = "456"
+        person.printInfo()
     }
 
     @Test
