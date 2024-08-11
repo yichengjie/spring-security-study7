@@ -52,23 +52,35 @@ open class UserInfoServiceImpl(private var accountMapper: AccountInfoMapper):
 
     @Transactional(rollbackFor = [Exception::class])
     override fun saveUserAndAccountMono(user: UserInfo, account: AccountInfo): String? {
-        // 这里有报错，但是事务不会回滚？
-        this.initData(user, account)
-        var userMono = Mono.fromCallable {
-            logger.info("user id : {}", user.id)
-            // 模拟一个耗时的计算或操作
-            this.save(user)
-            var a = 1/0
-            user.id
-        }
+        try {
+            // 这里有报错，但是事务不会回滚？
+            this.initData(user, account)
+            val userMono = Mono.fromCallable {
+                logger.info("mono save user id : {}", user.id)
+                // 模拟一个耗时的计算或操作
+                this.save(user)
+                var a = 1/0
+                user.id
+            }
 
-        val accountMono = Mono.fromCallable{
-            logger.info("account id : {}", account.id)
-            accountMapper.insert(account)
-            account.id
+            val accountMono = Mono.fromCallable{
+                logger.info("mono save account id : {}", account.id)
+                accountMapper.insert(account)
+                account.id
+            }
+            // Mono.zip(userMono, accountMono).block()
+            // subscribe value and error
+            Mono.zip(userMono, accountMono)
+                .doOnError { e -> throw e }
+                .subscribe(
+                    { t -> logger.info("zip user id : {}, account id : {}", t.t1, t.t2) },
+                    { e -> throw e}
+                )
+            return user.id
+        }catch (error: Exception){
+            logger.error("======> error : {}", error.message)
+            throw error
         }
-        Mono.zip(userMono, accountMono).subscribe()
-        return user.id
     }
 
     private fun initData(user: UserInfo, account: AccountInfo){
