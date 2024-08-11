@@ -11,5 +11,8 @@ class ColorTest {
     fun hello(){
         val color = Color.RED
         log.info("color : {}", color)
+
+        var fromCode = Color.fromCode("2")
+        log.info("fromCode : {}", fromCode)
     }
 }

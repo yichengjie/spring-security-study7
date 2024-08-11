@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -48,16 +49,18 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests((authorize) ->
             authorize
                 .requestMatchers("/hello/index").permitAll()
-                .anyRequest()
-                    .authenticated()
+                .anyRequest().authenticated()
         ).formLogin(Customizer.withDefaults())
-        .httpBasic(Customizer.withDefaults());
+        .httpBasic(Customizer.withDefaults())
+        //.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        //.userDetailsService(userDetailsManager())
+        ;
         //@formatter:on
         return http.build() ;
     }
 
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager(){
+    //@Bean
+    private InMemoryUserDetailsManager userDetailsManager(){
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user")
                 .password("123")
