@@ -54,7 +54,7 @@ public class SecurityConfiguration {
         ).formLogin(Customizer.withDefaults())
         .httpBasic(Customizer.withDefaults())
         //.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        //.userDetailsService(userDetailsManager())
+        .userDetailsService(userDetailsManager())
         ;
         //@formatter:on
         return http.build() ;
