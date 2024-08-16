@@ -1,0 +1,14 @@
+### create
+POST http://localhost:8080/json/ignore/create
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id":1,
+  "name":"yicj",
+  "password":"123456",
+  "userAddress":{
+    "userId":"1",
+    "address":"beijing"
+  }
+}
