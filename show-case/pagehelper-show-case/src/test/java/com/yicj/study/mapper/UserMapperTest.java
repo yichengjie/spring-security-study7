@@ -1,5 +1,6 @@
 package com.yicj.study.mapper;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.yicj.study.PageHelperApplication;
 import com.yicj.study.entity.UserEntity;
@@ -36,9 +37,10 @@ public class UserMapperTest {
 
     @Test
     void selectAll(){
-        PageHelper.startPage(1, 10);
-        List<UserEntity> list = userMapper.selectAll();
-        log.info("记录条数为：{}", list.size());
-        list.forEach(item -> log.info("item : {}", item));
+        try(Page<Object> objects = PageHelper.startPage(1, 10, false)) {
+            List<UserEntity> list = userMapper.selectAll();
+            log.info("记录条数为：{}", list.size());
+            list.forEach(item -> log.info("item : {}", item));
+        }
     }
 }
