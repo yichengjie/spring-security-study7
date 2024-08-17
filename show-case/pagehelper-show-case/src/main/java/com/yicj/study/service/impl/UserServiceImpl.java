@@ -1,7 +1,6 @@
 package com.yicj.study.service.impl;
 
 import com.yicj.study.entity.UserEntity;
-import com.yicj.study.mapper.UserMapper;
 import com.yicj.study.repository.UserRepository;
 import com.yicj.study.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository ;
 
     @Override
-    public void saveUser(UserEntity entity) {
-        userRepository.saveUser(entity) ;
+    public int saveUser(UserEntity entity) {
+        return userRepository.saveUser(entity) ;
     }
 }

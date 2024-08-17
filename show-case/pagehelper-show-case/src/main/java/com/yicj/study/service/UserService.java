@@ -12,5 +12,5 @@ import com.yicj.study.entity.UserEntity;
  */
 public interface UserService {
 
-    void saveUser(UserEntity entity) ;
+    int saveUser(UserEntity entity) ;
 }

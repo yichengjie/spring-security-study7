@@ -1,7 +1,6 @@
 package com.yicj.study.repository;
 
 import com.yicj.study.entity.UserEntity;
-import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -12,5 +11,5 @@ import org.springframework.stereotype.Repository;
  * @since 2024/08/17 12:41
  */
 public interface UserRepository {
-    void saveUser(UserEntity userEntity) ;
+    int saveUser(UserEntity userEntity) ;
 }

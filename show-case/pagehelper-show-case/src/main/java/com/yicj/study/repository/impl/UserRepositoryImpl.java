@@ -22,8 +22,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     private final UserMapper userMapper ;
     @Override
-    public void saveUser(UserEntity userEntity) {
+    public int saveUser(UserEntity userEntity) {
         log.info("real save user : {} to db !!", userEntity);
-        userMapper.saveUser(userEntity) ;
+        return userMapper.saveUser(userEntity) ;
     }
 }
