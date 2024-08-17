@@ -30,8 +30,8 @@ public class UserMapperTest {
     @BeforeEach
     void init(){
         Flux.range(1, 20)
-                .map(i -> new UserEntity(i+"", "yicj"+i, "123456", "beijing"))
-                .subscribe(userMapper::insertUser);
+            .map(i -> new UserEntity(i+"", "yicj"+i, "123456", "beijing"))
+            .subscribe(userMapper::saveUser);
     }
 
     @Test

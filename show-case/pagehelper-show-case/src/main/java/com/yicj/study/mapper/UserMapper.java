@@ -23,5 +23,5 @@ public interface UserMapper {
     List<UserEntity> selectAll() ;
 
     @Insert("insert into user_info (id, username, password, address) values (#{id}, #{username}, #{password}, #{address})")
-    int insertUser(UserEntity user) ;
+    int saveUser(UserEntity user) ;
 }
