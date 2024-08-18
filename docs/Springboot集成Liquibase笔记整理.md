@@ -62,9 +62,9 @@
                            http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
        <property name="autoIncrement" value="true"/>
        <changeSet author="system" id="00000000000001" context="dev">
-           <createTable tableName="jhi_date_time_wrapper">
+           <createTable tableName="hello_date_time_wrapper">
                <column  name="id" type="BIGINT">
-                   <constraints primaryKey="true" primaryKeyName="jhi_date_time_wrapperPK"/>
+                   <constraints primaryKey="true" primaryKeyName="hello_date_time_wrapperPK"/>
                </column>
                <column name="instant" type="timestamp"/>
                <column name="local_date_time" type="timestamp"/>
