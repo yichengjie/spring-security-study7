@@ -34,5 +34,4 @@ public class LiquibaseConfig {
         liquibase.setShouldRun(true);
         return liquibase;
     }
-
 }

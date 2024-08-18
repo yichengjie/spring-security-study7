@@ -1,6 +1,8 @@
 server:
   port: 8080
-
+spring:
+  profiles:
+    active: dev
 --- #spring datasource config ---
 spring:
   datasource:
@@ -15,8 +17,6 @@ spring:
   liquibase:
     contexts: dev,test
     enabled: true
-  profiles:
-    active: dev
 --- # logging configuration ---
 logging:
   level:
