@@ -27,6 +27,7 @@
         <module>api-show-case</module>
         <module>logstash-show-case</module>
         <module>mybatis-show-case</module>
+        <module>jpa-show-case</module>
     </modules>
 
 

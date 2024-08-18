@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet author="yicj1" id="20240818184500" context="test">
+        <createTable tableName="feature_message">
+            <column  name="id" type="varchar(64)">
+                <constraints primaryKey="true" primaryKeyName="feature_message_wrapperPK" nullable="false"/>
+            </column>
+            <column name="message_type" type="varchar(64)"/>
+            <column name="data_permission" type="text"/>
+            <column name="message_headline" type="varchar(2000)"/>
+            <column name="summary" type="varchar(2000)"/>
+            <column name="message_content" type="text"/>
+            <column name="link" type="varchar(2000)"/>
+            <column name="cover_page_name" type="varchar(2000)"/>
+            <column name="cover_page_url" type="varchar(2000)"/>
+            <column name="author" type="varchar(2000)"/>
+            <column name="valid_from_date" type="timestamp"/>
+            <column name="valid_to_date" type="timestamp"/>
+            <column name="created_by" type="varchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

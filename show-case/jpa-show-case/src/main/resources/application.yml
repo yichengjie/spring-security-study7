@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+--- #spring datasource config ---
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://192.168.56.100:3306/study?useSSL=false&serverTimezone=UTC
+#    username: root
+#    password: root
+#    jpa:
+#      show-sql: true
+
+--- #liquibase configuration ---
+spring:
+  liquibase:
+    contexts: dev,test
+    enabled: true
+  profiles:
+    active: dev
