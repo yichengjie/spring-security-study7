@@ -56,5 +56,7 @@ public class FeatureMessage {
     private String lastModifiedBy ;
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate ;
+    @Column(name = "effective_flag")
+    private Integer effectiveFlag ;
 
 }
