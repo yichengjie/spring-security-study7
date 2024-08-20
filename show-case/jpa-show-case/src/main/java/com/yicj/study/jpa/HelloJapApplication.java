@@ -16,6 +16,7 @@ public class HelloJapApplication {
     // https://zhuanlan.zhihu.com/p/624207419
     // https://blog.csdn.net/JingAi_jia917/article/details/138221740
     // https://blog.csdn.net/JingAi_jia917/article/details/139930204
+    // https://zhuanlan.zhihu.com/p/690935020
     public static void main(String[] args) {
         SpringApplication.run(HelloJapApplication.class, args);
     }
