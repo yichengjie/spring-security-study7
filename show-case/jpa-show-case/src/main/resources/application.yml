@@ -22,3 +22,11 @@ logging:
   level:
     root: info
     liquibase: WARN
+    org.hibernate.SQL: trace
+---  # spring data jpa configuration ---
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

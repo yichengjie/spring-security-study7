@@ -20,7 +20,7 @@ public class FeatureMessageConvertorTest {
     @Test
     void toDTO(){
         FeatureMessage entity = this.initFeatureMessage(2) ;
-        FeatureMessageDTO dto = FeatureMessageConvertor.I.toDTO(entity);
+        FeatureMessageDTO dto = FeatureMessageConvertor.I.toDto(entity);
         log.info("dto:{}", dto);
     }
 

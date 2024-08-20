@@ -4,6 +4,7 @@ import com.yicj.study.jpa.config.TestServiceConfiguration;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ActiveProfiles("dev")
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestServiceConfiguration.class})
+@TestPropertySource("classpath:application.yml")
 public class BasicServiceTest {
 
 }

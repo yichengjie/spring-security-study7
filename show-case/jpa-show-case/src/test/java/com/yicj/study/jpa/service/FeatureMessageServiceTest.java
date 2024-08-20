@@ -1,8 +1,15 @@
 package com.yicj.study.jpa.service;
 
+import com.yicj.study.jpa.HelloJapApplication;
+import com.yicj.study.jpa.config.YamlPropertySourceFactory;
 import com.yicj.study.jpa.entity.FeatureMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.env.YamlPropertySourceLoader;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDateTime;
@@ -16,6 +23,10 @@ import java.util.List;
  * @author yicj
  * @since 2024/08/18 19:25
  */
+@Slf4j
+//@SpringBootTest(classes = HelloJapApplication.class)
+@SpringJUnitConfig
+@TestPropertySource(value = "classpath:application.yml", factory = YamlPropertySourceFactory.class)
 public class FeatureMessageServiceTest extends BasicServiceTest{
 
     @Autowired
@@ -28,6 +39,15 @@ public class FeatureMessageServiceTest extends BasicServiceTest{
         list.forEach(item -> {
             System.out.println("FeatureMessage : " + item);
         });
+    }
+
+    @Test
+    void list4Page(){
+        List<FeatureMessage> list = this.initFeatureMessageList(32);
+        featureMessageService.batchSave(list) ;
+        //
+        var page = featureMessageService.list4Page(1, 10) ;
+        System.out.println("page : " + page);
     }
 
     @Test
@@ -66,6 +86,7 @@ public class FeatureMessageServiceTest extends BasicServiceTest{
             .createdDate(LocalDateTime.now())
             .lastModifiedBy("lastModifiedBy" + index)
             .lastModifiedDate(LocalDateTime.now())
+            .effectiveFlag(1)
             .build() ;
     }
 

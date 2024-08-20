@@ -1,5 +1,7 @@
 package com.yicj.study.jpa.service;
 
+import com.yicj.study.jpa.dto.FeatureMessageDTO;
+import com.yicj.study.jpa.dto.PageResponseData;
 import com.yicj.study.jpa.entity.FeatureMessage;
 
 import java.util.List;
@@ -19,5 +21,7 @@ public interface FeatureMessageService {
     FeatureMessage save(FeatureMessage entity) ;
 
     List<FeatureMessage> batchSave(List<FeatureMessage> list) ;
+
+    PageResponseData<FeatureMessageDTO> list4Page(int pageNum, int size);
 
 }

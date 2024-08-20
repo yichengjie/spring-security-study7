@@ -12,9 +12,9 @@ import java.util.List;
  */
 public interface BaseConvertor<Entity, DTO>{
 
-    DTO toDTO(Entity entity) ;
+    DTO toDto(Entity entity) ;
 
-    List<DTO> toDTO(List<Entity> list) ;
+    List<DTO> toDto(List<Entity> list) ;
 
     Entity toEntity(DTO dto) ;
 
