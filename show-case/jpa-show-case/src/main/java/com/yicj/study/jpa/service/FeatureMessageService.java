@@ -22,6 +22,9 @@ public interface FeatureMessageService {
 
     List<FeatureMessage> batchSave(List<FeatureMessage> list) ;
 
-    PageResponseData<FeatureMessageDTO> list4Page(int pageNum, int size);
+    PageResponseData<FeatureMessageDTO> list4PageExample(int pageNum, int size);
 
+    PageResponseData<FeatureMessageDTO> list4PageSpecification(int pageNum, int size);
+
+    PageResponseData<FeatureMessageDTO> list4PageSpecification2(int pageNum, int size);
 }

@@ -42,12 +42,30 @@ public class FeatureMessageServiceTest extends BasicServiceTest{
     }
 
     @Test
-    void list4Page(){
+    void list4PageExample(){
         List<FeatureMessage> list = this.initFeatureMessageList(32);
         featureMessageService.batchSave(list) ;
         //
-        var page = featureMessageService.list4Page(1, 10) ;
+        var page = featureMessageService.list4PageExample(1, 10) ;
         System.out.println("page : " + page);
+    }
+
+    @Test
+    void list4PageSpecification(){
+        List<FeatureMessage> list = this.initFeatureMessageList(32);
+        featureMessageService.batchSave(list) ;
+        //
+        var page = featureMessageService.list4PageSpecification(1, 10) ;
+        System.out.println("page info : " + page.getPageInfo());
+    }
+
+    @Test
+    void list4PageSpecification2(){
+        List<FeatureMessage> list = this.initFeatureMessageList(32);
+        featureMessageService.batchSave(list) ;
+        //
+        var page = featureMessageService.list4PageSpecification2(1, 10) ;
+        System.out.println("page info : " + page.getPageInfo());
     }
 
     @Test
@@ -80,8 +98,8 @@ public class FeatureMessageServiceTest extends BasicServiceTest{
             .coverPageName("coverPageName" + index)
             .coverPageUrl("coverPageUrl" + index)
             .author("author" + index)
-            .validFromDate(LocalDateTime.now())
-            .validToDate(LocalDateTime.now())
+            .validFromDate(LocalDateTime.now().minusDays(1))
+            .validToDate(LocalDateTime.now().plusDays(1))
             .createdBy("createdBy" + index)
             .createdDate(LocalDateTime.now())
             .lastModifiedBy("lastModifiedBy" + index)
