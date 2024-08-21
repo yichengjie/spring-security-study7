@@ -5,6 +5,7 @@ import com.yicj.study.jpa.dto.FeatureMessageDTO;
 import com.yicj.study.jpa.dto.PageInfo;
 import com.yicj.study.jpa.dto.PageResponseData;
 import com.yicj.study.jpa.entity.FeatureMessage;
+import com.yicj.study.jpa.entity.FeatureMessage_;
 import com.yicj.study.jpa.repository.FeatureMessageRepository;
 import com.yicj.study.jpa.repository.specification.FeatureMessageSpecification;
 import com.yicj.study.jpa.service.FeatureMessageService;
@@ -58,8 +59,8 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
         // query all effective message order by last_modified_date desc and created_date desc
         // 1. assemble query param
         Sort sort = Sort.by(
-                Sort.Order.desc("lastModifiedDate"),
-                Sort.Order.desc("createdDate")) ;
+                Sort.Order.desc(FeatureMessage_.LAST_MODIFIED_DATE),
+                Sort.Order.desc(FeatureMessage_.CREATED_DATE)) ;
         Pageable pageable = PageRequest.of(pageNum, size, sort) ;
         //
         FeatureMessage param = new FeatureMessage();
@@ -67,8 +68,8 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
         param.setValidFromDate(LocalDateTime.now()) ;
         param.setValidToDate(LocalDateTime.now());
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("effectiveFlag", match -> match.ignoreCase(true))
-                .withMatcher("summary", startsWith().ignoreCase());
+                .withMatcher(FeatureMessage_.EFFECTIVE_FLAG, match -> match.ignoreCase(true))
+                .withMatcher(FeatureMessage_.SUMMARY, startsWith().ignoreCase());
         Example<FeatureMessage> example = Example.of(param, matcher);
         // 2. execute query
         Page<FeatureMessage> pageResult = repository.findAll(example, pageable);
@@ -79,18 +80,18 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
     @Override
     public PageResponseData<FeatureMessageDTO> list4PageSpecification(int pageNum, int size) {
         Sort sort = Sort.by(
-                Sort.Order.desc("lastModifiedDate"),
-                Sort.Order.desc("createdDate")) ;
+                Sort.Order.desc(FeatureMessage_.LAST_MODIFIED_DATE),
+                Sort.Order.desc(FeatureMessage_.CREATED_DATE)) ;
         Pageable pageable = PageRequest.of(pageNum, size, sort) ;
         Specification<FeatureMessage> spec = (root, query, builder) ->{
             List<Predicate> list = new ArrayList<>();
             // 生效中数据
-            list.add(builder.equal(root.get("effectiveFlag"), "1")) ;
+            list.add(builder.equal(root.get(FeatureMessage_.EFFECTIVE_FLAG), "1")) ;
             // 生效开始日期小于等于当前日期
-            list.add(builder.lessThanOrEqualTo(root.get("validFromDate"), LocalDateTime.now())) ;
+            list.add(builder.lessThanOrEqualTo(root.get(FeatureMessage_.VALID_FROM_DATE), LocalDateTime.now())) ;
             // 生效截至日期大于当前日期
-            list.add(builder.greaterThan(root.get("validToDate"), LocalDateTime.now())) ;
-            Predicate[] predicates = list.toArray(new Predicate[list.size()]);
+            list.add(builder.greaterThan(root.get(FeatureMessage_.VALID_TO_DATE), LocalDateTime.now())) ;
+            Predicate[] predicates = list.toArray(new Predicate[0]);
             //return query.where(predicates).getRestriction() ;
             return builder.and(predicates) ;
         } ;
@@ -101,8 +102,8 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
     @Override
     public PageResponseData<FeatureMessageDTO> list4PageSpecification2(int pageNum, int size) {
         Sort sort = Sort.by(
-                Sort.Order.desc("lastModifiedDate"),
-                Sort.Order.desc("createdDate")) ;
+                Sort.Order.desc(FeatureMessage_.LAST_MODIFIED_DATE),
+                Sort.Order.desc(FeatureMessage_.CREATED_DATE)) ;
         Pageable pageable = PageRequest.of(pageNum, size, sort) ;
         //
         LocalDateTime now = LocalDateTime.now() ;
