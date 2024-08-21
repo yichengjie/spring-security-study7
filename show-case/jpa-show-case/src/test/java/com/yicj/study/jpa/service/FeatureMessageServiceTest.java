@@ -104,7 +104,7 @@ public class FeatureMessageServiceTest extends BasicServiceTest{
             .createdDate(LocalDateTime.now())
             .lastModifiedBy("lastModifiedBy" + index)
             .lastModifiedDate(LocalDateTime.now())
-            .effectiveFlag(1)
+            .activeFlag(1)
             .build() ;
     }
 
