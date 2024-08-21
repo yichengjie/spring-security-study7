@@ -16,7 +16,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface FeatureMessageRepository
-        extends /*JpaRepository<FeatureMessage, String>,
-        JpaSpecificationExecutor<FeatureMessage> ,*/
-        JpaRepositoryImplementation<FeatureMessage, String> {
+        extends JpaRepositoryImplementation<FeatureMessage, String> {
 }

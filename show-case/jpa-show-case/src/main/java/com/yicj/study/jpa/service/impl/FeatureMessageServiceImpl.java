@@ -60,11 +60,11 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
         Pageable pageable = PageRequest.of(pageNum, size, sort) ;
         //
         FeatureMessage param = new FeatureMessage();
-        param.setEffectiveFlag(1);
+        param.setActiveFlag(1);
         param.setValidFromDate(LocalDateTime.now()) ;
         param.setValidToDate(LocalDateTime.now());
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher(FeatureMessage_.EFFECTIVE_FLAG, match -> match.ignoreCase(true))
+                .withMatcher(FeatureMessage_.ACTIVE_FLAG, match -> match.ignoreCase(true))
                 .withMatcher(FeatureMessage_.SUMMARY, startsWith().ignoreCase());
         Example<FeatureMessage> example = Example.of(param, matcher);
         // 2. execute query
@@ -82,7 +82,7 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
         Specification<FeatureMessage> spec = (root, query, builder) ->{
             List<Predicate> list = new ArrayList<>();
             // 生效中数据
-            list.add(builder.equal(root.get(FeatureMessage_.EFFECTIVE_FLAG), "1")) ;
+            list.add(builder.equal(root.get(FeatureMessage_.ACTIVE_FLAG), "1")) ;
             // 生效开始日期小于等于当前日期
             list.add(builder.lessThanOrEqualTo(root.get(FeatureMessage_.VALID_FROM_DATE), LocalDateTime.now())) ;
             // 生效截至日期大于当前日期
@@ -104,7 +104,7 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
         //
         LocalDateTime now = LocalDateTime.now() ;
         Specification<FeatureMessage> spec = Specification.where(null);
-        spec = spec.and(FeatureMessageSpecification.eqEffectiveFlag(1));
+        spec = spec.and(FeatureMessageSpecification.eqActiveFlag(1));
         spec = spec.and(FeatureMessageSpecification.greaterThanValidToDate(now));
         spec = spec.and(FeatureMessageSpecification.lessThanOrEqualToValidFromDate(now));
         Page<FeatureMessage> pageResult = repository.findAll(spec, pageable);
