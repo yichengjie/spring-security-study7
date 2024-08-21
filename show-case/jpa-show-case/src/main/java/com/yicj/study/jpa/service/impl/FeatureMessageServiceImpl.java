@@ -14,13 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 
 /**
