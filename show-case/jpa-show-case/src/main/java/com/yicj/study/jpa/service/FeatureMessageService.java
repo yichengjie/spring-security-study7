@@ -27,4 +27,8 @@ public interface FeatureMessageService {
     PageResponseData<FeatureMessageDTO> list4PageSpecification(int pageNum, int size);
 
     PageResponseData<FeatureMessageDTO> list4PageSpecification2(int pageNum, int size);
+
+    PageResponseData<FeatureMessageDTO> list4PageSpecification3(int pageNum, int size);
+
+    List<FeatureMessageDTO> listSpecification();
 }
