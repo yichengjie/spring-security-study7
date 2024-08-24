@@ -18,14 +18,14 @@ import java.time.LocalDateTime;
 public class FeatureMessageSpecification {
 
     public static Specification<FeatureMessage> eqActiveFlag(Integer effectiveFlag) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(FeatureMessage_.ACTIVE_FLAG), effectiveFlag);
+        return (root, query, builder) -> builder.equal(root.get(FeatureMessage_.ACTIVE_FLAG), effectiveFlag);
     }
 
     public static Specification<FeatureMessage> greaterThanValidToDate(LocalDateTime validToDate) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get(FeatureMessage_.VALID_TO_DATE), validToDate);
+        return (root, query, builder) -> builder.greaterThan(root.get(FeatureMessage_.VALID_TO_DATE), validToDate);
     }
 
     public static Specification<FeatureMessage> lessThanOrEqualToValidFromDate(LocalDateTime validFromDate) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(FeatureMessage_.VALID_FROM_DATE), validFromDate);
+        return (root, query, builder) -> builder.lessThanOrEqualTo(root.get(FeatureMessage_.VALID_FROM_DATE), validFromDate);
     }
 }
