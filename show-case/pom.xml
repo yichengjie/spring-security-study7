@@ -28,6 +28,7 @@
         <module>logstash-show-case</module>
         <module>mybatis-show-case</module>
         <module>jpa-show-case</module>
+        <module>aws-show-case</module>
     </modules>
 
 
