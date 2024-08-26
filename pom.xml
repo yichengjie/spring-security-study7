@@ -13,8 +13,6 @@
     <modules>
         <module>show-case</module>
         <module>show-core</module>
-        <module>show-case/pagehelper-show-case</module>
-        <module>show-case/redis-show-case</module>
     </modules>
 
     <parent>
@@ -211,6 +209,12 @@
                 <groupId>org.hibernate.orm</groupId>
                 <artifactId>hibernate-jpamodelgen</artifactId>
                 <version>${jpamodelgen.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>1.12.770</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

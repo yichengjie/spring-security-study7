@@ -28,6 +28,10 @@
         <module>logstash-show-case</module>
         <module>mybatis-show-case</module>
         <module>jpa-show-case</module>
+        <module>aws-show-case</module>
+        <module>pagehelper-show-case</module>
+        <module>oauth-server-show-case</module>
+        <module>redis-show-case</module>
     </modules>
 
 
