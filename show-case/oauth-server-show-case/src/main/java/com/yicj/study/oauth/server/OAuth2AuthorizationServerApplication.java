@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author yicj
  * @since 2024/08/26 16:46
  */
+// https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html?ivk_sa=1024320u
 @SpringBootApplication
 public class OAuth2AuthorizationServerApplication {
     public static void main(String[] args) {
