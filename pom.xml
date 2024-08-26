@@ -14,6 +14,7 @@
         <module>show-case</module>
         <module>show-core</module>
         <module>show-case/pagehelper-show-case</module>
+        <module>show-case/oauth-server-show-case</module>
     </modules>
 
     <parent>
