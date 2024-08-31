@@ -33,6 +33,7 @@
         <module>oauth-server-show-case</module>
         <module>redis-show-case</module>
         <module>oauth-resource-show-case</module>
+        <module>security-show-case</module>
     </modules>
 
 
