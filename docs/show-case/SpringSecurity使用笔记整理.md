@@ -78,7 +78,7 @@
    ```
 2. 编写登录方法
    ```java
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public Authentication login(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response){
         //
         SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
@@ -94,4 +94,4 @@
         return authentication ;
     }
    ```
-3. 注意这里登录地址尽量不要使用/login, 否则登录会被UsernamePasswordAuthenticationFilter拦截, 无法进入自定义的登录method
+3. 注意如果启用了formLogin则Controller中的login地址不能是/login, 否则登录会被UsernamePasswordAuthenticationFilter拦截

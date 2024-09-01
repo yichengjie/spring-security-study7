@@ -48,13 +48,13 @@ public class DefaultSecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(HttpMethod.POST,"/user/login").permitAll()
+                .requestMatchers(HttpMethod.POST,"/login").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
-            .formLogin(form -> form
-                .loginPage("/login").permitAll()
-            )
+//            .formLogin(form -> form
+//                .loginPage("/login").permitAll()
+//            )
             .securityContext(context -> context
                 .requireExplicitSave(true)
                 .securityContextRepository(new DelegatingSecurityContextRepository(

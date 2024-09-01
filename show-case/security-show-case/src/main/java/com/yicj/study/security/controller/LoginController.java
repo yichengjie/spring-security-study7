@@ -45,7 +45,7 @@ public class LoginController {
     }
 
     @ResponseBody
-    @PostMapping("/user/login")
+    @PostMapping("/login")
     public Authentication login(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response){
         //
         SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder.getContextHolderStrategy();
