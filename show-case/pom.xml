@@ -34,6 +34,7 @@
         <module>redis-show-case</module>
         <module>oauth-resource-show-case</module>
         <module>security-show-case</module>
+        <module>oauth-client-show-case</module>
     </modules>
 
 
