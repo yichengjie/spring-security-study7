@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.backoff.BackOffPolicyBuilder;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 
@@ -55,5 +57,27 @@ public class HelloRetryService {
         //记日志到数据库 或者调用其余的方法
         log.info("异常信息: {}", e.getMessage());
         return 400;
+    }
+
+    public int retry(int code) throws Exception {
+        RetryTemplate template = RetryTemplate.builder()
+            .maxAttempts(3)
+            .retryOn(Exception.class)
+            .customBackoff(
+                BackOffPolicyBuilder
+                    .newBuilder()
+                    .delay(1000)
+                    .multiplier(2)
+                    .build()
+            )
+            .build();
+        return template.execute(context -> {
+            log.info("test被调用,时间：{}", LocalTime.now());
+            if (code == 0){
+                throw new Exception("情况不对头！");
+            }
+            log.info("test被调用,情况对头了！");
+            return 200;
+        }) ;
     }
 }

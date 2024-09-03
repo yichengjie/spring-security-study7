@@ -25,4 +25,9 @@ public class HelloRetryController {
     public int index(@PathVariable("code") int code) throws Exception {
         return helloRetryService.hello(code);
     }
+
+    @GetMapping("/retry/{code}")
+    public int retry(@PathVariable("code") int code) throws Exception {
+        return helloRetryService.retry(code);
+    }
 }
