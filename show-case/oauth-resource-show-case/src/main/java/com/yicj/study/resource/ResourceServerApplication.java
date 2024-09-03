@@ -1,15 +1,13 @@
-package com.yicj.study;
+package com.yicj.study.resource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.retry.annotation.EnableRetry;
 
-@EnableRetry
 @SpringBootApplication
-public class HelloApiApplication {
+public class ResourceServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HelloApiApplication.class, args) ;
+        SpringApplication.run(ResourceServerApplication.class, args) ;
     }
 
 }
