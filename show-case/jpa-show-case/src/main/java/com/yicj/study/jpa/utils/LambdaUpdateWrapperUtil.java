@@ -1,6 +1,7 @@
 package com.yicj.study.jpa.utils;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.yicj.study.jpa.entity.BaseEntity;
 
 /**
@@ -16,6 +17,7 @@ public class LambdaUpdateWrapperUtil {
     private LambdaUpdateWrapperUtil(){}
 
     public static <T extends BaseEntity> void supplyDeleteFlag(LambdaUpdateWrapper<T> wrapper){
-        wrapper.set(BaseEntity::getDeletedFlag, true) ;
+        //new SFunction<T,Boolean>()
+        wrapper.set(T::getDeletedFlag, true) ;
     }
 }
