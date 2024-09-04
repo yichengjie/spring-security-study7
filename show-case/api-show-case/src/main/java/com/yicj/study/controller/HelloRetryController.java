@@ -1,6 +1,6 @@
 package com.yicj.study.controller;
 
-import com.yicj.study.retry.HelloRetryService;
+import com.yicj.study.retry.SpringRetryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/retry")
 @RequiredArgsConstructor
 public class HelloRetryController {
-    private final HelloRetryService helloRetryService ;
+    private final SpringRetryService helloRetryService ;
 
     @GetMapping("/index/{code}")
     public int index(@PathVariable("code") int code) throws Exception {

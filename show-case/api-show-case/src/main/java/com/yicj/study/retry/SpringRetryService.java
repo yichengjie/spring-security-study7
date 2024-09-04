@@ -19,7 +19,7 @@ import java.time.LocalTime;
  */
 @Slf4j
 @Service
-public class HelloRetryService {
+public class SpringRetryService {
     /**
      * value：抛出指定异常才会重试
      * include：和value一样，默认为空，当exclude也为空时，默认所有异常
@@ -78,6 +78,11 @@ public class HelloRetryService {
             }
             log.info("test被调用,情况对头了！");
             return 200;
+        }, context -> {
+            log.info("回调方法执行！！！！");
+            //记日志到数据库 或者调用其余的方法
+            log.info("异常信息: {}", context.getLastThrowable().getMessage());
+            return 400;
         }) ;
     }
 }
