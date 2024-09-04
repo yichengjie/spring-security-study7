@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * <p>
- * DatasourceConfig
+ * JpaConfig
  * </p>
  *
  * @author yicj
@@ -18,6 +18,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EntityScan(basePackages = "com.yicj.study.jpa.entity")
 @EnableJpaRepositories(basePackages = "com.yicj.study.jpa.repository")
-public class DatasourceConfig {
+public class JpaConfig {
 
 }

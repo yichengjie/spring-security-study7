@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="autoIncrement" value="true"/>
+
+    <changeSet author="yicj1" id="20240904135100" context="test">
+        <createTable tableName="user_info">
+            <column  name="id" type="varchar(64)">
+                <constraints primaryKey="true" primaryKeyName="user_info_wrapperPK" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(200)"/>
+            <column name="password" type="varchar(200)"/>
+            <column name="email" type="varchar(200)"/>
+            <column name="phone" type="varchar(30)"/>
+            <column name="address" type="text"/>
+            <column name="created_by" type="varchar(255)"/>
+            <column name="created_date" type="timestamp"/>
+            <column name="last_modified_by" type="varchar(255)"/>
+            <column name="last_modified_date" type="timestamp"/>
+            <column name="deleted_flag" type="boolean"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

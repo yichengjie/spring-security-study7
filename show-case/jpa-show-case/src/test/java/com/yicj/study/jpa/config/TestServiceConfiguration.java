@@ -23,12 +23,7 @@ import javax.sql.DataSource;
  * @since 2024/08/18 19:17
  */
 @AutoConfigureDataJpa
-//
-@EnableTransactionManagement
-@EntityScan(basePackages = "com.yicj.study.jpa.entity")
-@EnableJpaRepositories("com.yicj.study.jpa.repository")
-//
-@Import({LiquibaseConfig.class})
+@Import({LiquibaseConfig.class, JpaConfig.class, MybatisConfig.class})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(value = {"com.yicj.study.jpa.service"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
