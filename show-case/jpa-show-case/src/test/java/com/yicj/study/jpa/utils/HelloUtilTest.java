@@ -35,12 +35,24 @@ class HelloUtilTest {
     @Test
     void hello2() throws Exception {
         SFunc<UserInfo, Boolean> func = UserInfo::getDeletedFlag;
+        String lambdaMethodName = this.getLambdaMethodName(func);
+        log.info("implMethodName : {}", lambdaMethodName) ;
+        String fieldName = PropertyNamer.methodToProperty(lambdaMethodName);
+        log.info("fieldName : {}", fieldName) ;
+    }
+
+    @Test
+    void hello3() throws Exception {
+        SFunction<String, Boolean> func = value -> true;
+        String methodName = this.getLambdaMethodName(func);
+        log.info("methodName : {}", methodName) ;
+    }
+
+    private String getLambdaMethodName(Function<?,?> func) throws Exception {
         Method method = func.getClass().getDeclaredMethod("writeReplace");
         method.setAccessible(true);
         SerializedLambda lambda = (SerializedLambda)method.invoke(func);
-        String implMethodName = lambda.getImplMethodName();
-        log.info("implMethodName : {}", implMethodName) ;
-        String fieldName = PropertyNamer.methodToProperty(implMethodName);
+        return lambda.getImplMethodName();
     }
 
     interface SFunc<T,R> extends Function<T, R>, Serializable {
