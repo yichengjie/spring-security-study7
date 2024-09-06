@@ -7,7 +7,7 @@ spring:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.56.100:3306/study?useSSL=false&serverTimezone=UTC&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3306/study?useSSL=false&serverTimezone=UTC&allowMultiQueries=true
     username: root
     password: root
     jpa:

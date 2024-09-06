@@ -18,7 +18,9 @@ public interface FeatureMessageService {
 
     List<FeatureMessage> findAll() ;
 
-    FeatureMessage save(FeatureMessage entity) ;
+    FeatureMessageDTO create(FeatureMessageDTO dto) ;
+
+    int update(FeatureMessageDTO dto) ;
 
     List<FeatureMessage> batchSave(List<FeatureMessage> list) ;
 

@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
 
 /**
@@ -46,8 +48,36 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
     }
 
     @Override
-    public FeatureMessage save(FeatureMessage entity) {
-        return repository.save(entity);
+    public FeatureMessageDTO create(FeatureMessageDTO dto) {
+        FeatureMessage entity = FeatureMessageConvertor.I.toEntity(dto);
+        entity.setId(UUID.randomUUID().toString());
+        entity.setCreatedDate(LocalDateTime.now());
+        entity.setCreatedBy("admin");
+        entity.setLastModifiedBy("admin");
+        entity.setLastModifiedDate(LocalDateTime.now());
+        repository.save(entity);
+        return FeatureMessageConvertor.I.toDto(entity);
+    }
+
+    @Override
+    public int update(FeatureMessageDTO dto) {
+        FeatureMessage entity = new FeatureMessage() ;
+        entity.setId(dto.getId());
+        entity.setMessageType(dto.getMessageType());
+        entity.setDataPermission(dto.getDataPermission());
+        entity.setMessageHeadline(dto.getMessageHeadline());
+        entity.setSummary(dto.getSummary());
+        entity.setMessageContent(dto.getMessageContent());
+        entity.setLink(dto.getLink());
+        entity.setCoverPageName(dto.getCoverPageName());
+        entity.setCoverPageUrl(dto.getCoverPageUrl());
+        entity.setAuthor(dto.getAuthor());
+        entity.setValidFromDate(dto.getValidFromDate());
+        entity.setValidToDate(dto.getValidToDate());
+        entity.setLastModifiedBy("admin");
+        entity.setLastModifiedDate(LocalDateTime.now());
+        repository.save(entity);
+        return 1;
     }
 
     @Override
