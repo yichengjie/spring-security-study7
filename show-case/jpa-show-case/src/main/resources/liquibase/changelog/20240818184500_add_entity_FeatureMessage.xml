@@ -8,27 +8,62 @@
 
     <property name="autoIncrement" value="true"/>
 
-    <changeSet author="yicj1" id="20240818184500" context="test">
+    <changeSet id="20240820150100_1" author="yicj1">
         <createTable tableName="feature_message">
-            <column  name="id" type="varchar(64)">
-                <constraints primaryKey="true" primaryKeyName="feature_message_wrapperPK" nullable="false"/>
+            <column name="id" type="varchar(36)">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="message_type" type="varchar(64)"/>
-            <column name="data_permission" type="text"/>
-            <column name="message_headline" type="varchar(2000)"/>
-            <column name="summary" type="varchar(2000)"/>
-            <column name="message_content" type="text"/>
-            <column name="link" type="varchar(2000)"/>
-            <column name="cover_page_name" type="varchar(2000)"/>
-            <column name="cover_page_url" type="varchar(2000)"/>
-            <column name="author" type="varchar(2000)"/>
-            <column name="valid_from_date" type="timestamp"/>
-            <column name="valid_to_date" type="timestamp"/>
-            <column name="created_by" type="varchar(255)"/>
-            <column name="created_date" type="timestamp"/>
-            <column name="last_modified_by" type="varchar(255)"/>
-            <column name="last_modified_date" type="timestamp"/>
-            <column name="active_flag" type="int"/>
+            <column name="message_type" type="varchar(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message_headline" type="varchar(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="summary" type="varchar(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="message_content" type="text">
+                <constraints nullable="true"/>
+            </column>
+            <column name="link" type="varchar(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="cover_page_name" type="varchar(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="cover_page_url" type="varchar(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="author" type="varchar(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="attachments" type="varchar(2000)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="valid_from_date" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="valid_to_date" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="status" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="seq" type="int" defaultValue="999999">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_date" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="last_modified_date" type="timestamp">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

@@ -1,12 +1,15 @@
 package com.yicj.study.jpa.entity;
 
+import com.yicj.study.jpa.dto.FeatureMessageAttachmentDTO;
+import com.yicj.study.jpa.dto.convertor.FeatureMessageAttachmentConvertor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.List;
 
 /**
  * <p>
@@ -22,14 +25,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "feature_message")
-public class FeatureMessage {
+public class FeatureMessage implements Serializable {
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private String id ;
+    @Column(name = "id")
+    private String id;
     @Column(name = "message_type")
     private String messageType ;
-    @Column(name = "data_permission")
-    private String dataPermission ;
     @Column(name = "message_headline")
     private String messageHeadline ;
     @Column(name = "summary")
@@ -44,19 +45,27 @@ public class FeatureMessage {
     private String coverPageUrl ;
     @Column(name = "author")
     private String author ;
+    @Column(name = "attachments")
+    @Convert(converter = FeatureMessageAttachmentConvertor.class)
+    private List<FeatureMessageAttachmentDTO> attachments ;
     @Column(name = "valid_from_date")
-    private LocalDateTime validFromDate ;
+    private Instant validFromDate ;
     @Column(name = "valid_to_date")
-    private LocalDateTime validToDate ;
+    private Instant validToDate ;
+    // 0: not effective 1: effective
+    @Column(name = "status")
+    private Integer status ;
+    // order by field
+    @Column(name = "seq")
+    private Integer seq ;
+    // --------------common field----------------
     @Column(name = "created_by")
     private String createdBy ;
     @Column(name = "created_date")
-    private LocalDateTime createdDate ;
+    private Instant createdDate ;
     @Column(name = "last_modified_by")
     private String lastModifiedBy ;
     @Column(name = "last_modified_date")
-    private LocalDateTime lastModifiedDate ;
-    @Column(name = "active_flag")
-    private Integer activeFlag ;
+    private Instant lastModifiedDate ;
 
 }

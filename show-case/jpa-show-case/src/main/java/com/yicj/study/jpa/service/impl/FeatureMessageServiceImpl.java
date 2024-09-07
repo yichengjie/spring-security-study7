@@ -19,9 +19,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.startsWith;
@@ -51,20 +54,22 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
     public FeatureMessageDTO create(FeatureMessageDTO dto) {
         FeatureMessage entity = FeatureMessageConvertor.I.toEntity(dto);
         entity.setId(UUID.randomUUID().toString());
-        entity.setCreatedDate(LocalDateTime.now());
+        entity.setCreatedDate(Instant.now());
         entity.setCreatedBy("admin");
         entity.setLastModifiedBy("admin");
-        entity.setLastModifiedDate(LocalDateTime.now());
+        entity.setLastModifiedDate(Instant.now());
         repository.save(entity);
         return FeatureMessageConvertor.I.toDto(entity);
     }
 
     @Override
     public int update(FeatureMessageDTO dto) {
-        FeatureMessage entity = new FeatureMessage() ;
-        entity.setId(dto.getId());
+        Optional<FeatureMessage> optional = repository.findById(dto.getId());
+        if (!optional.isPresent()) {
+            return 0;
+        }
+        FeatureMessage entity = optional.get();
         entity.setMessageType(dto.getMessageType());
-        entity.setDataPermission(dto.getDataPermission());
         entity.setMessageHeadline(dto.getMessageHeadline());
         entity.setSummary(dto.getSummary());
         entity.setMessageContent(dto.getMessageContent());
@@ -72,10 +77,14 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
         entity.setCoverPageName(dto.getCoverPageName());
         entity.setCoverPageUrl(dto.getCoverPageUrl());
         entity.setAuthor(dto.getAuthor());
-        entity.setValidFromDate(dto.getValidFromDate());
-        entity.setValidToDate(dto.getValidToDate());
-        entity.setLastModifiedBy("admin");
-        entity.setLastModifiedDate(LocalDateTime.now());
+        entity.setAttachments(dto.getAttachments());
+        // start date
+        Instant startInstant = FeatureMessageConvertor.I.toStartLocalDataTime(dto.getValidFromDate());
+        entity.setValidFromDate(startInstant);
+        // end date
+        Instant endInstant = FeatureMessageConvertor.I.toEndLocalDataTime(dto.getValidToDate());
+        entity.setValidToDate(endInstant);
+        entity.setStatus(dto.getStatus());
         repository.save(entity);
         return 1;
     }
@@ -97,11 +106,11 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
         Pageable pageable = PageRequest.of(pageNum, size, sort) ;
         //
         FeatureMessage param = new FeatureMessage();
-        param.setActiveFlag(1);
-        param.setValidFromDate(LocalDateTime.now()) ;
-        param.setValidToDate(LocalDateTime.now());
+        param.setStatus(1);
+        param.setValidFromDate(Instant.now()) ;
+        param.setValidToDate(Instant.now());
         ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher(FeatureMessage_.ACTIVE_FLAG, match -> match.ignoreCase(true))
+                .withMatcher(FeatureMessage_.STATUS, match -> match.ignoreCase(true))
                 .withMatcher(FeatureMessage_.SUMMARY, startsWith().ignoreCase());
         Example<FeatureMessage> example = Example.of(param, matcher);
         // 2. execute query
@@ -175,7 +184,7 @@ public class FeatureMessageServiceImpl implements FeatureMessageService {
     private List<Predicate> buildQueryPredicate(CriteriaBuilder builder, Root<FeatureMessage> root){
         List<Predicate> list = new ArrayList<>();
         // 生效中数据
-        list.add(builder.equal(root.get(FeatureMessage_.ACTIVE_FLAG), "1")) ;
+        list.add(builder.equal(root.get(FeatureMessage_.STATUS), "1")) ;
         // 生效开始日期小于等于当前日期
         list.add(builder.lessThanOrEqualTo(root.get(FeatureMessage_.VALID_FROM_DATE), LocalDateTime.now())) ;
         // 生效截至日期大于当前日期

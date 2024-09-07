@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 public class FeatureMessageSpecification {
 
     public static Specification<FeatureMessage> eqActiveFlag(Integer effectiveFlag) {
-        return (root, query, builder) -> builder.equal(root.get(FeatureMessage_.ACTIVE_FLAG), effectiveFlag);
+        return (root, query, builder) -> builder.equal(root.get(FeatureMessage_.STATUS), effectiveFlag);
     }
 
     public static Specification<FeatureMessage> greaterThanValidToDate(LocalDateTime validToDate) {

@@ -3,7 +3,10 @@ package com.yicj.study.jpa.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -15,9 +18,8 @@ import java.time.LocalDateTime;
  */
 @Data
 public class FeatureMessageDTO implements Serializable {
-    private String id ;
+    private String id;
     private String messageType ;
-    private String dataPermission ;
     private String messageHeadline ;
     private String summary ;
     private String messageContent ;
@@ -25,11 +27,13 @@ public class FeatureMessageDTO implements Serializable {
     private String coverPageName ;
     private String coverPageUrl ;
     private String author ;
-    private LocalDateTime validFromDate ;
-    private LocalDateTime validToDate ;
-    private String createdBy ;
-    private LocalDateTime createdDate ;
-    private String lastModifiedBy ;
-    private LocalDateTime lastModifiedDate ;
-    private Integer effectiveFlag ;
+    private List<FeatureMessageAttachmentDTO> attachments ;
+    private LocalDate validFromDate ;
+    private LocalDate validToDate ;
+    // 0: not effective 1: effective
+    private Integer status ;
+    // order by field
+    private Integer seq ;
+    private Instant createdDate;
+    private Instant lastModifiedDate;
 }

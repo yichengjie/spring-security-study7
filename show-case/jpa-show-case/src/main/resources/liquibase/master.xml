@@ -10,5 +10,5 @@
     <property name="clobType" value="clob" dbms="h2"/>
     <property name="clobType" value="clob" dbms="mysql, oracle, mssql, mariadb, postgresql"/>
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
-    <includeAll path="liquibase/changelog/"/>
+    <includeAll path="liquibase/changelog"/>
 </databaseChangeLog>
