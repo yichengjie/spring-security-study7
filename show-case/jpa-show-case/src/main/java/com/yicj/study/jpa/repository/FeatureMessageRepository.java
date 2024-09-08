@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Meta;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.data.repository.query.Param;
@@ -35,8 +36,9 @@ public interface FeatureMessageRepository
     @Query("select f from FeatureMessage f where f.messageHeadline = ?1")
     Page<FeatureMessage> list4Page(String messageHeadline, Pageable pageable);
 
-    List<FeatureMessage> findByMessageHeadlineOrderByLastModifiedDateDesc(String lastname);
+    @Meta(comment = "find roles by name")
+    List<FeatureMessage> findByMessageHeadlineOrderByLastModifiedDateDesc(String messageHeadline);
 
-    FeatureMessage findTopByMessageHeadlineOrderByLastModifiedDateDesc(String lastname);
+    FeatureMessage findTopByMessageHeadlineOrderByLastModifiedDateDesc(String messageHeadline);
 
 }
