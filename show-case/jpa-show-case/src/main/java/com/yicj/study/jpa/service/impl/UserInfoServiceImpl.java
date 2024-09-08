@@ -33,7 +33,8 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void deleteById(String id) {
         LambdaUpdateWrapper<UserInfo> wrapper = new LambdaUpdateWrapper<>() ;
         wrapper.eq(UserInfo::getId, id) ;
-        LambdaUpdateWrapperUtil.supplyDeleteFlag(wrapper);
+        // LambdaUpdateWrapperUtil.supplyDeleteFlag(wrapper);
+        wrapper.set(UserInfo::getDeletedFlag, true) ;
         userInfoMapper.update(wrapper) ;
     }
 
