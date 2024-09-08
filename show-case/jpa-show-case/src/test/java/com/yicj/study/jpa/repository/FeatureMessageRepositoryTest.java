@@ -6,9 +6,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.JpaSort;
 import org.springframework.test.context.ActiveProfiles;
 import reactor.core.publisher.Flux;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,7 +26,7 @@ import java.util.List;
  * @since 2024/08/18 15:49
  */
 @Slf4j
-@ActiveProfiles("dev")
+//@ActiveProfiles("dev")
 @SpringBootTest(classes = HelloJapApplication.class)
 public class FeatureMessageRepositoryTest {
 
@@ -50,11 +56,59 @@ public class FeatureMessageRepositoryTest {
         repository.saveAll(list) ;
     }
 
+    @Test
+    void listByStatus(){
+        //Sort sort = Sort.by("LENGTH(messageContent)") ;
+        Sort sort = JpaSort.unsafe(" ifnull(seq, 999999999)").descending()
+                .and(Sort.by("lastModifiedDate").descending())
+                .and(Sort.by("createdDate").descending()) ;
+        List<FeatureMessage> list = repository.listByStatus(1, sort);
+        list.forEach(item -> log.info("FeatureMessage : {}", item));
+    }
+
+    @Test
+    void listByStatus2(){
+        //Sort sort = Sort.by("LENGTH(messageContent)") ;
+        Sort sort = Sort.by("fnSeq").descending()
+                .and(Sort.by("lastModifiedDate").descending())
+                .and(Sort.by("createdDate").descending()) ;
+        List<Object[]> list = repository.listByStatus2(1, sort);
+        list.forEach(item -> log.info("FeatureMessage : {}", item));
+    }
+
+    //
+
+    @Test
+    void list4Page(){
+        //Sort sort = Sort.by("LENGTH(messageContent)") ;
+        Sort sort = JpaSort.unsafe(" ifnull(seq, 999999999)").descending()
+                .and(Sort.by("lastModifiedDate").descending())
+                .and(Sort.by("createdDate").descending()) ;
+        int pageIndex = 1 ;
+        int pageSize = 10 ;
+        Pageable pageable = PageRequest.of(pageIndex, pageSize, sort) ;
+        String messageHeadline = null ;
+        Page<FeatureMessage> pageResult = repository.list4Page(messageHeadline, pageable);
+        log.info(" : {}", pageResult.getSize());
+        pageResult.forEach(item -> log.info("FeatureMessage : {}", item));
+    }
+
+    @Test
+    void findByMessageHeadlineOrderByLastModifiedDateDesc(){
+        List<FeatureMessage> list = repository.findByMessageHeadlineOrderByLastModifiedDateDesc("headline1");
+        list.forEach(item -> log.info("FeatureMessage : {}", item));
+    }
+
+    @Test
+    void findTopByMessageHeadlineOrderByLastModifiedDateDesc(){
+        FeatureMessage featureMessage = repository.findTopByMessageHeadlineOrderByLastModifiedDateDesc("headline1");
+        log.info("FeatureMessage : {}", featureMessage);
+    }
+
     private FeatureMessage initFeatureMessage(int index){
         return FeatureMessage.builder()
                 .id("id" + index )
                 .messageType("type" + index)
-                .dataPermission("permission" + index)
                 .messageHeadline("headline" + index)
                 .summary("summary" + index)
                 .messageContent("content" + index)
@@ -62,12 +116,12 @@ public class FeatureMessageRepositoryTest {
                 .coverPageName("coverPageName" + index)
                 .coverPageUrl("coverPageUrl" + index)
                 .author("author" + index)
-                .validFromDate(LocalDateTime.now())
-                .validToDate(LocalDateTime.now())
+                .validFromDate(Instant.now())
+                .validToDate(Instant.now())
                 .createdBy("createdBy" + index)
-                .createdDate(LocalDateTime.now())
+                .createdDate(Instant.now())
                 .lastModifiedBy("lastModifiedBy" + index)
-                .lastModifiedDate(LocalDateTime.now())
+                .lastModifiedDate(Instant.now())
                 .build() ;
     }
 }

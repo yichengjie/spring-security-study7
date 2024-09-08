@@ -49,8 +49,8 @@
             <column name="status" type="int" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="seq" type="int" defaultValue="999999">
-                <constraints nullable="false"/>
+            <column name="seq" type="int" >
+                <constraints nullable="true"/>
             </column>
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true"/>

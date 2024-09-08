@@ -4,6 +4,8 @@ import com.yicj.study.jpa.dto.FeatureMessageDTO;
 import com.yicj.study.jpa.entity.FeatureMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 /**
@@ -29,7 +31,6 @@ public class FeatureMessageConvertorTest {
         return FeatureMessage.builder()
                 .id("id" + index )
                 .messageType("type" + index)
-                .dataPermission("permission" + index)
                 .messageHeadline("headline" + index)
                 .summary("summary" + index)
                 .messageContent("content" + index)
@@ -37,13 +38,13 @@ public class FeatureMessageConvertorTest {
                 .coverPageName("coverPageName" + index)
                 .coverPageUrl("coverPageUrl" + index)
                 .author("author" + index)
-                .validFromDate(LocalDateTime.now())
-                .validToDate(LocalDateTime.now())
+                .validFromDate(Instant.now())
+                .validToDate(Instant.now())
                 .createdBy("createdBy" + index)
-                .createdDate(LocalDateTime.now())
+                .createdDate(Instant.now())
                 .lastModifiedBy("lastModifiedBy" + index)
-                .lastModifiedDate(LocalDateTime.now())
-                .activeFlag(1)
+                .lastModifiedDate(Instant.now())
+                .status(1)
                 .build() ;
     }
 

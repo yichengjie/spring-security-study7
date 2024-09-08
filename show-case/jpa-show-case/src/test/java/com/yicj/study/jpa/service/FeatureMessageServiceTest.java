@@ -12,6 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import reactor.core.publisher.Flux;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -90,7 +91,6 @@ public class FeatureMessageServiceTest extends BasicServiceTest{
         return FeatureMessage.builder()
             .id("id" + index )
             .messageType("type" + index)
-            .dataPermission("permission" + index)
             .messageHeadline("headline" + index)
             .summary("summary" + index)
             .messageContent("content" + index)
@@ -98,15 +98,14 @@ public class FeatureMessageServiceTest extends BasicServiceTest{
             .coverPageName("coverPageName" + index)
             .coverPageUrl("coverPageUrl" + index)
             .author("author" + index)
-            .validFromDate(LocalDateTime.now().minusDays(1))
-            .validToDate(LocalDateTime.now().plusDays(1))
+            .validFromDate(Instant.now())
+            .validToDate(Instant.now())
             .createdBy("createdBy" + index)
-            .createdDate(LocalDateTime.now())
+            .createdDate(Instant.now())
             .lastModifiedBy("lastModifiedBy" + index)
-            .lastModifiedDate(LocalDateTime.now())
-            .activeFlag(1)
+            .lastModifiedDate(Instant.now())
+            .status(1)
             .build() ;
     }
-
 
 }

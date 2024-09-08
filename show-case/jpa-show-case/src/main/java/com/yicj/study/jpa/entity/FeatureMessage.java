@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Persistable;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "feature_message")
-public class FeatureMessage implements Serializable {
+public class FeatureMessage implements Serializable, Persistable<String> {
     @Id
     @Column(name = "id")
     private String id;
@@ -68,4 +70,8 @@ public class FeatureMessage implements Serializable {
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate ;
 
+    @Override
+    public boolean isNew() {
+        return false;
+    }
 }

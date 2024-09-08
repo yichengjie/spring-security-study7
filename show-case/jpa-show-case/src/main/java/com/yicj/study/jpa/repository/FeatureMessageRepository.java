@@ -1,10 +1,17 @@
 package com.yicj.study.jpa.repository;
 
 import com.yicj.study.jpa.entity.FeatureMessage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +24,19 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FeatureMessageRepository
         extends JpaRepositoryImplementation<FeatureMessage, String> {
+
+    @Query("select f from FeatureMessage f where f.status = ?1")
+    List<FeatureMessage> listByStatus(Integer status, Sort sort) ;
+
+    @Query("select f.id, f.messageHeadline, ifnull(f.seq, 999999999) as fnSeq from FeatureMessage f where f.status = ?1")
+    List<Object[]> listByStatus2(Integer status, Sort sort);
+
+    // messageHeadline like %?1%
+    @Query("select f from FeatureMessage f where f.messageHeadline = ?1")
+    Page<FeatureMessage> list4Page(String messageHeadline, Pageable pageable);
+
+    List<FeatureMessage> findByMessageHeadlineOrderByLastModifiedDateDesc(String lastname);
+
+    FeatureMessage findTopByMessageHeadlineOrderByLastModifiedDateDesc(String lastname);
+
 }
