@@ -44,7 +44,7 @@ public class FeatureMessageRepositoryTest {
 
     @Test
     void save() {
-        var featureMessage = this.initFeatureMessage(1) ;
+        var featureMessage = this.initFeatureMessage(2) ;
         repository.save(featureMessage) ;
     }
 
@@ -105,6 +105,13 @@ public class FeatureMessageRepositoryTest {
         log.info("FeatureMessage : {}", featureMessage);
     }
 
+//    @Test
+//    void findByMessageHeadline(){
+//        String headline = "headline1" ;
+//        FeatureMessage list = repository.findByMessageHeadline(headline);
+//        log.info("FeatureMessage : {}", list);
+//    }
+
     private FeatureMessage initFeatureMessage(int index){
         return FeatureMessage.builder()
                 .id("id" + index )
@@ -122,6 +129,7 @@ public class FeatureMessageRepositoryTest {
                 .createdDate(Instant.now())
                 .lastModifiedBy("lastModifiedBy" + index)
                 .lastModifiedDate(Instant.now())
+                .status(1)
                 .build() ;
     }
 }

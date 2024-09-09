@@ -41,4 +41,7 @@ public interface FeatureMessageRepository
 
     FeatureMessage findTopByMessageHeadlineOrderByLastModifiedDateDesc(String messageHeadline);
 
+//    @Query(value = "select * from feature_message f where f.message_headline = ?1", nativeQuery = true)
+//    List findByMessageHeadline(String messageHeadline);
+
 }
