@@ -35,6 +35,7 @@
         <module>oauth-resource-show-case</module>
         <module>security-show-case</module>
         <module>oauth-client-show-case</module>
+        <module>r2dbc-show-case</module>
     </modules>
 
 
