@@ -36,6 +36,7 @@
         <module>security-show-case</module>
         <module>oauth-client-show-case</module>
         <module>r2dbc-show-case</module>
+        <module>kotlin-show-case</module>
     </modules>
 
 
