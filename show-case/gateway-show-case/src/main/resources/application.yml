@@ -1,0 +1,20 @@
+#spring:
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: add_request_header_route
+#          uri: https://example.org
+#          predicates:
+#            - Path=/red/{segment}
+#          filters:
+#            - AddRequestHeader=X-Request-Red, Blue-{segment}
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: add_request_header_route
+          uri: https://example.org
+          predicates:
+            - Path=/red/{segment}
+          filters:
+            - AddRequestHeader=X-Request-Red, Blue-{segment}
