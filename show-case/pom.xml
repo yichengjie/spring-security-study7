@@ -38,6 +38,7 @@
         <module>r2dbc-show-case</module>
         <module>kotlin-show-case</module>
         <module>gateway-show-case</module>
+        <module>message-show-case</module>
     </modules>
 
 
