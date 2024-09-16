@@ -5,15 +5,16 @@ spring:
   cloud:
     stream:
       binders:
-#        kafka-us:
-#          type: kafka
-#          environment:
-#            spring:
-#              cloud:
-#                stream:
-#                  kafka:
-#                    binder:
-#                      brokers: localhost:9092
+        kafka-us:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: localhost
+                      defaultBrokerPort: 9092
         kafka-cn:
           type: kafka
           environment:
@@ -22,7 +23,8 @@ spring:
                 stream:
                   kafka:
                     binder:
-                      brokers: localhost:9092
+                      brokers: localhost
+                      defaultBrokerPort: 9092
       default-binder: kafka-cn
 --- # kafka 消费通道配置
 spring:
