@@ -1,14 +1,20 @@
 package com.yicj.message.component;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.*;
+import org.springframework.messaging.support.AbstractSubscribableChannel;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.Random;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -68,5 +74,33 @@ class MySubscribableChannelTest {
             new MessageHeaders(Collections.singletonMap("ignore", true)))
         );
         log.info("successCount : {}, failCount : {}", successCount.get(), failCount.get());
+    }
+
+    @Slf4j
+    static class MySubscribableChannel extends AbstractSubscribableChannel {
+
+        private final Random random = new Random() ;
+
+        @Override
+        protected boolean sendInternal(@NotNull Message<?> message, long timeout) {
+            if (CollectionUtils.isEmpty(getSubscribers())){
+                return false ;
+            }
+            Iterator<MessageHandler> iterator = getSubscribers().iterator();
+            // 记录当前处理的下标
+            int index = 0 ,targetIndex = random.nextInt(getSubscribers().size());
+            // 随机选择一个下标
+            while (iterator.hasNext()){
+                MessageHandler messageHandler = iterator.next();
+                log.info("subscriber count : {}, current index : {}, target index : {}", getSubscribers().size(), index, targetIndex);
+                // 如果当前下标等于随机下标，则处理消息
+                if (index == targetIndex){
+                    messageHandler.handleMessage(message);
+                    return true ;
+                }
+                index ++ ;
+            }
+            return false;
+        }
     }
 }

@@ -1,0 +1,34 @@
+server:
+  port: 9090
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: ${spring.kafka.bootstrap-servers}
+      binders:
+        kafka-us:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka: {spring.cloud.stream.kafka.binder}
+      default-binder: kafka-us
+      function:
+        definition: inputChannel;outputChannel
+      bindings:
+        inputChannel-in-0:
+          binder: kafka-us
+          destination: kafkatest
+          group: inputChannel
+          contentType: text/plain
+        outputChannel-out-0:
+          binder: kafka-us
+          destination: kafkatest
+          contentType: text/plain
+          producer:
+            partition-count: 1
+
