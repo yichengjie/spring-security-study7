@@ -5,8 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 /**
@@ -21,10 +25,20 @@ public class KafkaChannel {
     private final StreamBridge streamBridge ;
 
     @Bean
-    public Consumer<Message<String>> inputChannel(){
+    public Consumer<Message<List<String>>> inputChannel(){
         return message -> {
-            log.info("Received message body : {}", message.getPayload()); ;
-            log.info("Received message header : {}", message.getHeaders()); ;
+            List<String> payload = message.getPayload();
+            // message size
+            log.info("Received message size : {}", payload.size());
+            payload.forEach(item -> {
+                log.info("Received message : {}", item);
+            });
+            log.info("Received message header : {}", message.getHeaders());
+            MessageHeaders headers = message.getHeaders();
+            Acknowledgment acknowledgment = headers.get(KafkaHeaders.ACKNOWLEDGMENT, Acknowledgment.class);
+            if (acknowledgment != null) {
+                acknowledgment.acknowledge();
+            }
         } ;
     }
 

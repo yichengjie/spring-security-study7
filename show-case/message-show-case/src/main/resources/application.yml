@@ -1,34 +1,56 @@
 server:
   port: 9090
+--- # kafka 通用部分配置
 spring:
-  kafka:
-    bootstrap-servers: localhost:9092
   cloud:
     stream:
-      kafka:
-        binder:
-          brokers: ${spring.kafka.bootstrap-servers}
       binders:
-        kafka-us:
+#        kafka-us:
+#          type: kafka
+#          environment:
+#            spring:
+#              cloud:
+#                stream:
+#                  kafka:
+#                    binder:
+#                      brokers: localhost:9092
+        kafka-cn:
           type: kafka
           environment:
             spring:
               cloud:
                 stream:
-                  kafka: {spring.cloud.stream.kafka.binder}
-      default-binder: kafka-us
-      function:
-        definition: inputChannel;outputChannel
+                  kafka:
+                    binder:
+                      brokers: localhost:9092
+      default-binder: kafka-cn
+--- # kafka 消费通道配置
+spring:
+  cloud:
+    function:
+      definition: inputChannel;outputChannel
+    stream:
       bindings:
         inputChannel-in-0:
-          binder: kafka-us
-          destination: kafkatest
+          binder: kafka-cn
+          destination: kafka-test
           group: inputChannel
           contentType: text/plain
+          consumer:
+            batch-mode: true
         outputChannel-out-0:
-          binder: kafka-us
-          destination: kafkatest
+          binder: kafka-cn
+          destination: kafka-test
           contentType: text/plain
           producer:
             partition-count: 1
-
+      kafka:
+        bindings:
+          inputChannel-in-0:
+            consumer:
+              ack-mode: manual_immediate
+              configuration:
+                key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+                max.poll.records: 500
+                max.poll.interval.ms: 600000
+                fetch.max.bytes: 52428800

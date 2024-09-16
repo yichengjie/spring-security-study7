@@ -16,9 +16,9 @@
     ```
 5. 生产者
     ```text
-    .\kafka-console-producer.bat --broker-list localhost:9092 --topic kafkatest
+    .\kafka-console-producer.bat --broker-list localhost:9092 --topic kafka-test
     ```
 6. 消费者
     ```text
-    .\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic kafkatest --from-beginning
+    .\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic outputChannel-in-0 --from-beginning
     ```
