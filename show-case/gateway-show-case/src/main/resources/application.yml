@@ -2,7 +2,7 @@ server:
   port: 9999
 spring:
   profiles:
-    active: add-param # cookie, path, header, method, query, remote-addr, add-header, add-param
+    active: custom # cookie, path, header, method, query, remote-addr, add-header, add-param, custom
   application:
     name: gateway-show-case
 logging:

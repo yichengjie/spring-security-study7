@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes: # 访问http://localhost:9999/jd时，会转发到https://www.jd.com/
+        - id: custom_route
+          uri: https://www.jd.com/
+          predicates:
+            - Path=/jd
+          filters:
+            - Custom=name,test
