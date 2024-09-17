@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gateway:
+      routes: # 访问http://localhost:9999/addParam时，会转发到http://localhost:8081/addParam?name=xujin
+        - id: add_param_route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/hello/addParam
+          filters:
+            - AddRequestParameter=name, xujin

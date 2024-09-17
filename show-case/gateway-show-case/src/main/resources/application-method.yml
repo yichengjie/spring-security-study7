@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes: # 当访问 http://localhost:9999 时，会被转发到 https://jd.com
+        - id: method_route
+          uri: https://jd.com
+          predicates:
+            - Method=GET

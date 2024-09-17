@@ -2,7 +2,7 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: cookie_route
+        - id: header_route
           uri: http://localhost:8081
           predicates:
-            - Cookie=mycookie, mycookievalue
+            - Header=X-Request-Id, xujin

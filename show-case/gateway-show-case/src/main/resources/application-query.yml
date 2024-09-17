@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes: # 当访问 http://localhost:9999?foo=bar 时，会被转发到 https://baidu.com
+        - id: query_route
+          uri: https://baidu.com
+          predicates:
+            - Query=foo, bar

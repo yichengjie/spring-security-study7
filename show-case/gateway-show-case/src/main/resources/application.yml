@@ -1,3 +1,13 @@
+server:
+  port: 9999
 spring:
   profiles:
-    active: cookie
+    active: add-param # cookie, path, header, method, query, remote-addr, add-header, add-param
+  application:
+    name: gateway-show-case
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
+    org.springframework.http.server.reactive: debug
+    org.springframework.web.reactive: debug
+    reactor.ipc.netty: debug

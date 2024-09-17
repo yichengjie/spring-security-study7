@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes: # 当访问 http://127.0.0.1:9999 时，会被转发到 https://jd.com
+        - id: remote_addr_route
+          uri: https://jd.com
+          predicates:
+            - RemoteAddr=127.0.0.1
