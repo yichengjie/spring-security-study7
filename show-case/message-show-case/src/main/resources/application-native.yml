@@ -1,0 +1,48 @@
+--- # kafka 消费通道配置
+spring:
+  cloud:
+    function:
+      definition: inputChannel;outputChannel
+    stream:
+      default-binder: kafka-cn
+      binders:
+        kafka-cn:
+          type: kafka
+          environment:
+            spring:
+              cloud:
+                stream:
+                  kafka:
+                    binder:
+                      brokers: localhost:9092
+      bindings:
+        inputChannel-in-0:
+          binder: kafka-cn
+          destination: kafka-test
+          group: inputChannel
+          contentType: text/plain
+          consumer:
+            batch-mode: true
+        outputChannel-out-0:
+          binder: kafka-cn
+          destination: kafka-test
+          contentType: application/json
+          producer:
+            use-native-encoding: true
+      kafka:
+        binder:
+          configuration:
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            max.poll.records: 500
+            max.poll.interval.ms: 600000
+            fetch.max.bytes: 52428800
+        bindings:
+          inputChannel-in-0:
+            consumer:
+              ack-mode: manual_immediate
+          outputChannel-out-0:
+            producer:
+              configuration:
+                key.serializer: org.apache.kafka.common.serialization.StringSerializer
+                value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
