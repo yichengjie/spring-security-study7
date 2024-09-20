@@ -1,5 +1,6 @@
 package com.yicj.message.controller;
 
+import com.yicj.message.model.UserInfoVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.Message;
@@ -22,7 +23,13 @@ public class HelloController {
 
     @GetMapping("/send")
     public Boolean sendMessage(@RequestParam("msg") String msg){
-        Message<String> message = MessageBuilder.withPayload("kafka测试：" + msg).build();
-        return streamBridge.send("outputChannel-out-0", message) ;
+        //Message<String> message = MessageBuilder.withPayload("kafka测试：" + msg).build();
+        UserInfoVO userInfo = UserInfoVO.builder()
+                .username("张三")
+                .address("北京")
+                .phone("13888888888")
+                .build() ;
+        return streamBridge.send("outputChannel-out-0", userInfo) ;
     }
+
 }
