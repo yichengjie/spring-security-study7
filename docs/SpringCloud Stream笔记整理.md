@@ -105,8 +105,9 @@
           kafka:
             binder:
               configuration:
-                security.protocol: SSL
-                ssl.endpoint.identification.algorithm: ""
-                ssl.truststore.location: "classpath:client.truststore.jks"
+                security.protocol: "SASL_SSL"
+                sasl.mechanism: "SCRAM-SHA-512"
+                ssl.truststore.location: "${user.home}/client_truststore.jks"
                 ssl.truststore.password: "hello123"
+                ssl.endpoint.identification.algorithm: ""
     ```

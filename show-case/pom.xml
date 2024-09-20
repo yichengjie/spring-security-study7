@@ -40,6 +40,7 @@
         <module>gateway-show-case</module>
         <module>message-show-case</module>
         <module>client-show-case</module>
+        <module>kafka-show-case</module>
     </modules>
 
 

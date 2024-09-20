@@ -1,0 +1,8 @@
+server:
+  port: 9090
+### Kafka config
+app:
+  kafka:
+    consumer:
+      group-id: inputChannel
+    topic: kafka-test
