@@ -23,7 +23,9 @@ public class KafkaConsumerConfig {
     @Bean("kafkaListenerContainerFactory")
     public ConcurrentKafkaListenerContainerFactory<String, String> containerFactory(ConsumerProperties properties){
         Map<String, Object> factoryBeanProp = this.assembleConsumerProperties(properties);
+        // consumer factory
         var consumerFactory = new DefaultKafkaConsumerFactory<>(factoryBeanProp);
+        // container factory
         var containerFactory = new ConcurrentKafkaListenerContainerFactory<String, String>();
         containerFactory.setConsumerFactory(consumerFactory);
         containerFactory.getContainerProperties().setPollTimeout(properties.getPollTimeout());
