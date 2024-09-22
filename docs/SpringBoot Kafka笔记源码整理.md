@@ -1,5 +1,9 @@
 ### @EnableKafka 注解
-1. KafkaBootstrapConfiguration 注入Bean 
+1. spring-boot-autoconfigure配置中导入 KafkaAutoConfiguration 
+2. KafkaAutoConfiguration中@import 引入 KafkaAnnotationDrivenConfiguration
+3. KafkaAnnotationDrivenConfiguration.EnableKafkaConfiguration上存在 @EnableKafka注解
+4. @EnableKafka注解中@Import导入KafkaBootstrapConfiguration
+5. KafkaBootstrapConfiguration 注入Bean 
     ```text
     KafkaListenerAnnotationBeanPostProcessor
     KafkaListenerEndpointRegistry
