@@ -1,0 +1,12 @@
+### 获取授权码 （使用浏览器访问）
+GET http://127.0.0.1:9090/oauth2/authorize?client_id=oidc-client&response_type=code&scope=user.info+openid&redirect_uri=http://127.0.0.1:8080/login/oauth2/code/oidc-client
+
+### 获取token （Postman 调用）
+POST http://127.0.0.1:9090/oauth2/token
+Authorization: Basic b2lkYy1jbGllbnQ6MTIzNDU2
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+
+grant_type=authorization_code
+    &redirect_uri=http%3A%2F%2F127.0.0.1%3A8080%2Flogin%2Foauth2%2Fcode%2Foidc-client
+    &code=vUrpHrw3xC4MgD-lX89wFMDVlQVzjMvUuhH5cFUzTwlV-ieG3o96b181YL2oPfaBH79BHVN5QcGAVdiHTdzX0S58jqQBgnuLTRcHPPoATxVeX6jB0NemPOOczToq6w8Z
