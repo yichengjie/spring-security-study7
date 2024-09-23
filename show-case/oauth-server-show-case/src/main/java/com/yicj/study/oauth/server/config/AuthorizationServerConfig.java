@@ -12,6 +12,8 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.yicj.study.oauth.server.suport.PasswordAuthenticationConverter;
+import com.yicj.study.oauth.server.suport.PasswordAuthenticationProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,10 +25,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.authorization.InMemoryOAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -35,6 +42,7 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+import org.springframework.security.oauth2.server.authorization.token.*;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -46,8 +54,20 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 public class AuthorizationServerConfig {
 
 	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return NoOpPasswordEncoder.getInstance() ;
+	}
+
+
+	@Bean
 	@Order(1)
-	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
+	public SecurityFilterChain authorizationServerSecurityFilterChain(
+			HttpSecurity http,
+			OAuth2AuthorizationService authorizationService,
+			OAuth2TokenGenerator<?> tokenGenerator,
+			RegisteredClientRepository registeredClientRepository,
+			UserDetailsService userDetailsService,
+			PasswordEncoder passwordEncoder)
 			throws Exception {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
@@ -64,6 +84,14 @@ public class AuthorizationServerConfig {
 			// Accept access tokens for User Info and/or Client Registration
 			.oauth2ResourceServer((resourceServer) -> resourceServer
 					.jwt(Customizer.withDefaults()));
+
+		// 配置password grant type
+		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+			.tokenEndpoint((tokenEndpoint) -> tokenEndpoint
+					.accessTokenRequestConverter(new PasswordAuthenticationConverter())
+					.authenticationProvider(new PasswordAuthenticationProvider(
+							authorizationService, tokenGenerator, registeredClientRepository, userDetailsService, passwordEncoder))
+			);
 
 		return http.build();
 	}
@@ -85,7 +113,7 @@ public class AuthorizationServerConfig {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		UserDetails userDetails = User.withDefaultPasswordEncoder()
+		UserDetails userDetails = User.builder()
 				.username("user")
 				.password("123456")
 				.roles("USER")
@@ -97,7 +125,7 @@ public class AuthorizationServerConfig {
 	public RegisteredClientRepository registeredClientRepository() {
 		RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
 				.clientId("oidc-client")
-				.clientSecret("{noop}123456")
+				.clientSecret("123456")
 				//客户端认证基于请求头
 				.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
@@ -114,6 +142,22 @@ public class AuthorizationServerConfig {
 				.build();
 
 		return new InMemoryRegisteredClientRepository(oidcClient);
+	}
+
+	// oauth授权服务
+	@Bean
+	public OAuth2AuthorizationService authorizationService() {
+		return new InMemoryOAuth2AuthorizationService();
+	}
+
+	// access_token生成器
+	@Bean
+	public OAuth2TokenGenerator<?> tokenGenerator(JWKSource<SecurityContext> jwkSource) {
+		JwtGenerator jwtGenerator = new JwtGenerator(new NimbusJwtEncoder(jwkSource));
+		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
+		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
+		return new DelegatingOAuth2TokenGenerator(
+				jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
 	}
 
 	@Bean

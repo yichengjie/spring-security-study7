@@ -9,4 +9,4 @@ Accept: */*
 
 grant_type=authorization_code
     &redirect_uri=http%3A%2F%2F127.0.0.1%3A8080%2Flogin%2Foauth2%2Fcode%2Foidc-client
-    &code=vUrpHrw3xC4MgD-lX89wFMDVlQVzjMvUuhH5cFUzTwlV-ieG3o96b181YL2oPfaBH79BHVN5QcGAVdiHTdzX0S58jqQBgnuLTRcHPPoATxVeX6jB0NemPOOczToq6w8Z
+    &code=8rIq44rqc0yxiYY7ZwSyaKhylwJwqbImt1yLdJkWNZxWhi9QSdrSS0x6L0ompXhGapI-Kf-DtJpcmapenRucoU7OyvuYc_LX8zMufDlTyTqXTozNQOylaykSHq-puw9j
