@@ -96,3 +96,12 @@
    ```
 3. 注意如果启用了formLogin则Controller中的login地址不能是/login, 否则登录会被UsernamePasswordAuthenticationFilter拦截
 4. 打印详细日志：```logging.level.org.springframework.security=TRACE```
+5. Spring容器中Filter不启用
+   ```text
+   @Bean
+   public FilterRegistrationBean<TenantFilter> tenantFilterRegistration(TenantFilter filter) {
+       FilterRegistrationBean<TenantFilter> registration = new FilterRegistrationBean<>(filter);
+       registration.setEnabled(false);
+       return registration;
+   }
+   ```
