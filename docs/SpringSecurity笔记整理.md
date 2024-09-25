@@ -95,3 +95,4 @@
     }
    ```
 3. 注意如果启用了formLogin则Controller中的login地址不能是/login, 否则登录会被UsernamePasswordAuthenticationFilter拦截
+4. 打印详细日志：```logging.level.org.springframework.security=TRACE```
