@@ -14,8 +14,8 @@ import java.util.Set;
 @SpringBootApplication
 public class ClientApplication {
     public static void main(String[] args) {
-        //SpringApplication.run(ClientApplication.class, args) ;
-        System.exit(SpringApplication.exit(SpringApplication.run(ClientApplication.class, args)));
+        SpringApplication.run(ClientApplication.class, args) ;
+        //System.exit(SpringApplication.exit(SpringApplication.run(ClientApplication.class, args)));
     }
 
     @Bean
