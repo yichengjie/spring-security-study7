@@ -1,0 +1,27 @@
+spring:
+  r2dbc:
+    url: r2dbcs:mysql://localhost:3306/study?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+    pool:
+      enabled: true
+      initial-size: 10
+      validation-query: SELECT 1
+  sql:
+    init:
+      mode: never
+  jackson:
+    default-property-inclusion: non_null
+## logging config
+logging:
+  level:
+    sql: debug
+    web: debug
+    root: info
+    com.yicj.study.r2dbc: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n'
+
+### custom config
+app:
+  secretkey: '636eac2534bcfcc0'

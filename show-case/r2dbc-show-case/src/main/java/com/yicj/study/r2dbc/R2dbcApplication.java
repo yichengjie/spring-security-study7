@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author yicj
  * @since 2024/9/11 21:46
  */
+// https://blog.csdn.net/qq_62377885/article/details/141185125
 @SpringBootApplication
 public class R2dbcApplication {
 
