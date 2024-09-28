@@ -18,7 +18,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-            .info(new Info().title("Spring Boot 中使用 Swagger UI 构建 RESTful API")
+            .info(new Info().title("Spring Boot 中使用 Swagger UI 构建 Restful API")
                 .contact(new Contact())
                 .description("Hello Restfull API")
                 .version("v1.0.0")
