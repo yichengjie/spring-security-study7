@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: client-show-case
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 logging:
   level:
     root: info
@@ -13,3 +17,5 @@ springdoc:
   swagger-ui:
     enabled: true # 开启swagger界面，依赖OpenApi，需要OpenApi同时开启
     path: /swagger-ui/index.html
+  packages-to-scan: com.yicj.study.controller
+
