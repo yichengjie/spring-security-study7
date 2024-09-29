@@ -41,6 +41,7 @@
         <module>message-show-case</module>
         <module>client-show-case</module>
         <module>kafka-show-case</module>
+        <module>springdoc-show-case</module>
     </modules>
 
 

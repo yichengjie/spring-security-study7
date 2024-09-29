@@ -2,11 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: client-show-case
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
+    name: springdoc-show-case
 logging:
   level:
     root: info
@@ -17,4 +13,4 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /index.html
-
+  packages-to-scan: com.yicj.study.springdoc.controller
