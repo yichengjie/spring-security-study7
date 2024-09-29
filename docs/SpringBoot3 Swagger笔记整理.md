@@ -59,3 +59,4 @@
        path: /index.html
      packages-to-scan: com.yicj.study.springdoc.controller
    ```
+4. 启动项目，访问http://localhost:8081/swagger-ui/index.html，即可查看API文档
