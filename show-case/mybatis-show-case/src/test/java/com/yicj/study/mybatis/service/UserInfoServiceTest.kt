@@ -1,13 +1,11 @@
 package com.yicj.study.mybatis.service
 
-import com.yicj.study.mybatis.CommonUtil
+import com.yicj.study.mybatis.utils.CommonUtil
 import com.yicj.study.mybatis.HelloMybatisApplication
 import com.yicj.study.mybatis.entity.AccountInfo
 import com.yicj.study.mybatis.entity.UserInfo
 import com.yicj.study.mybatis.model.Person
 import com.yicj.study.mybatis.model.Student
-import lombok.extern.slf4j.Slf4j
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

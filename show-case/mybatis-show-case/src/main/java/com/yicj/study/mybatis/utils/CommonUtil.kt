@@ -1,4 +1,4 @@
-package com.yicj.study.mybatis
+package com.yicj.study.mybatis.utils
 
 import java.util.UUID
 

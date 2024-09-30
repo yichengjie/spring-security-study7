@@ -1,7 +1,7 @@
 package com.yicj.study.mybatis.service.impl
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
-import com.yicj.study.mybatis.CommonUtil
+import com.yicj.study.mybatis.utils.CommonUtil
 import com.yicj.study.mybatis.entity.AccountInfo
 import com.yicj.study.mybatis.entity.UserInfo
 import com.yicj.study.mybatis.mapper.AccountInfoMapper
