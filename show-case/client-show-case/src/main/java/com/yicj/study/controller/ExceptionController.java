@@ -1,9 +1,9 @@
 package com.yicj.study.controller;
 
-import com.yicj.study.exception.BadRequestAlertException;
-import com.yicj.study.exception.NotFoundException;
-import com.yicj.study.exception.PermissionDeniedException;
-import com.yicj.study.exception.ServiceUnavailableException;
+import com.yicj.core.exception.BadRequestAlertException;
+import com.yicj.core.exception.NotFoundException;
+import com.yicj.core.exception.PermissionDeniedException;
+import com.yicj.core.exception.ServiceUnavailableException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

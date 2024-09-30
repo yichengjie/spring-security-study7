@@ -12,7 +12,7 @@
 
     <modules>
         <module>show-case</module>
-        <module>show-core</module>
+        <module>asc-core</module>
     </modules>
 
     <parent>
@@ -282,6 +282,36 @@
                  <artifactId>logback-core</artifactId>
                  <version>1.2.3</version>
              </dependency>-->
+
+            <dependency>
+                <groupId>com.yicj.study</groupId>
+                <artifactId>asc-logstash-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yicj.study</groupId>
+                <artifactId>asc-swagger-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yicj.study</groupId>
+                <artifactId>asc-security-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yicj.study</groupId>
+                <artifactId>asc-common-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yicj.study</groupId>
+                <artifactId>asc-mvc-starter</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
