@@ -1,6 +1,7 @@
 package com.yicj.study.mybatis.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yicj.study.mybatis.entity.UserReact;
 import com.yicj.study.mybatis.mapper.UserReactMapper;
@@ -15,8 +16,8 @@ public class UserReactServiceImpl
 
     @Override
     public List<UserReact> selectByName(String name) {
-        LambdaQueryWrapper<UserReact> wrapper = new LambdaQueryWrapper<>() ;
-        wrapper.eq(UserReact::getName, name) ;
+        QueryWrapper<UserReact> wrapper = new QueryWrapper<>() ;
+        wrapper.eq("a.name", name) ;
         return baseMapper.selectByCustomSql(wrapper);
     }
 

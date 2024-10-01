@@ -4,12 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.yicj.study.mybatis.model.GradeEnum;
 import lombok.Data;
-import java.time.LocalDateTime;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @TableName("user_react")
-public class UserReact {
+public class UserReact extends BaseEntity {
 
     @TableId(type = IdType.AUTO)
     private String id ;
@@ -26,10 +28,7 @@ public class UserReact {
     @TableField("role")
     private String role ;
 
-    @TableField("insert_time")
-    private LocalDateTime insertTime ;
-
-    @TableField("update_time")
-    private LocalDateTime updateTime ;
+    @TableField("grade")
+    private GradeEnum grade ;
 
 }

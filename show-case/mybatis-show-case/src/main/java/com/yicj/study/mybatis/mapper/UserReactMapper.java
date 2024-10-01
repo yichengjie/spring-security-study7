@@ -13,6 +13,6 @@ import java.util.List;
 @Mapper
 public interface UserReactMapper extends BaseMapper<UserReact> {
 
-    @Select("SELECT * FROM user_react ${ew.customSqlSegment}")
+    @Select("SELECT * FROM user_react a ${ew.customSqlSegment}")
     List<UserReact> selectByCustomSql(@Param(Constants.WRAPPER) Wrapper<UserReact> wrapper);
 }
