@@ -7,8 +7,11 @@ import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapp
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.yicj.study.mybatis.HelloMybatisApplication;
 import com.yicj.study.mybatis.entity.UserReact;
+import com.yicj.study.mybatis.model.User;
+import com.yicj.study.mybatis.support.CurrentUserHolder;
 import com.yicj.study.mybatis.utils.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +28,15 @@ class UserReactServiceTest {
 
     @Autowired
     private UserReactService userReactService ;
+
+    @BeforeEach
+    void init(){
+        User user = new User() ;
+        user.setUserName("yicj");
+        user.setAdmin(false);
+        user.setShops(List.of("shop1", "shop2"));
+        CurrentUserHolder.setUser(user);
+    }
 
     @Test
     void selectByName() {

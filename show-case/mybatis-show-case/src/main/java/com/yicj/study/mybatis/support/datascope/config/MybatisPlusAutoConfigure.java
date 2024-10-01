@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusAutoConfigure {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(
-                            DataScopeHandler dataScopeHandler) {
+            DataScopeHandler dataScopeHandler) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(
             new DataScopeInnerInterceptor(dataScopeHandler)

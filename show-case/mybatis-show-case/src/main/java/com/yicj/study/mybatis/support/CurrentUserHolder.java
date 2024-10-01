@@ -11,4 +11,7 @@ public class CurrentUserHolder {
        return CURRENT_USER.get() ;
     }
 
+    public static void setUser(User user) {
+        CURRENT_USER.set(user);
+    }
 }

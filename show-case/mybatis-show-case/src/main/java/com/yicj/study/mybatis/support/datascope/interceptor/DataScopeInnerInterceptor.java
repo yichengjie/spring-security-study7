@@ -15,6 +15,7 @@ import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.Statement;
 import net.sf.jsqlparser.statement.select.*;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -41,10 +42,10 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
         if (null == user) {
             if (log.isInfoEnabled()) {
                 log.info("未登录无user不执行数据权限");
-                return;
             }
+            return;
         }
-        if (user.getAdmin()) {
+        if (BooleanUtils.isTrue(user.getAdmin())) {
             if (log.isInfoEnabled()) {
                 log.info("管理员不执行数据权限");
             }
