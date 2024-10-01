@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 
 @Component
-public class CustomDataScopeHandler implements DataScopeHandler{
+public class DefaultDataScopeHandler implements DataScopeHandler{
 
     /**
      * 处理数据权限sql
