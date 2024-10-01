@@ -85,7 +85,7 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
      */
     protected void processSelect(Select select) {
         // 处理sqlBody
-        this.processSelectBody(select.getSelectBody());
+        this.processSelectBody(select);
         List<WithItem> withItemsList = select.getWithItemsList();
         if (!CollectionUtils.isEmpty(withItemsList)) {
             withItemsList.forEach(this::processSelectBody);
@@ -105,9 +105,7 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
         } else if (selectBody instanceof WithItem) {
             // With关键字
             WithItem withItem = (WithItem) selectBody;
-            /**
-             * jsqlparser 4.3版本 使用 {@code withItem.getSubSelect().getSelectBody())} 代替 {@code withItem.getSelectBody()}
-             */
+            // jsqlparser 4.3版本 使用 {@code withItem.getSubSelect().getSelectBody())} 代替 {@code withItem.getSelectBody()}
             //processSelectBody(withItem.getSubSelect().getSelectBody());
             processSelectBody(withItem.getSelect());
         } else {
