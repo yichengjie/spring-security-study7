@@ -1,0 +1,18 @@
+spring:
+  elasticsearch:
+    connection-timeout: 1000
+    uris: http://localhost:9200
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/study?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&rewriteBatchedStatements=true
+    username: root
+    password: root
+  application:
+    name: elasticsearch-show-case
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.yicj.elasticsearch.entity
+

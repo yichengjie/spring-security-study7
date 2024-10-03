@@ -19,11 +19,28 @@ public class PersonServiceTest {
     private PersonService personService ;
 
     @Test
+    void add(){
+        Person person = new Person() ;
+        person.setId(CommonUtil.uuid());
+        person.setName("test");
+        person.setAge(18);
+        personService.save(person) ;
+    }
+
+    @Test
     void list() {
         Person person = new Person() ;
         person.setId(CommonUtil.uuid());
-        person.setName("yicj");
+        person.setName("test");
         person.insert() ;
+    }
+
+    @Test
+    void update(){
+        Person person = new Person() ;
+        person.setId("625805604c3d455389821d29262318b4");
+        person.setName("test1");
+        personService.updateById(person) ;
     }
 
 }

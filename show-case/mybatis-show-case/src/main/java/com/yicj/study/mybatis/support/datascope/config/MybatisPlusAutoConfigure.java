@@ -6,15 +6,15 @@ import com.yicj.study.mybatis.support.datascope.interceptor.DataScopeInnerInterc
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class MybatisPlusAutoConfigure {
-    @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(
-            DataScopeHandler dataScopeHandler) {
-        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        interceptor.addInnerInterceptor(
-            new DataScopeInnerInterceptor(dataScopeHandler)
-        );
-        return interceptor;
-    }
-}
+//@Configuration
+//public class MybatisPlusAutoConfigure {
+//    @Bean
+//    public MybatisPlusInterceptor mybatisPlusInterceptor(
+//            DataScopeHandler dataScopeHandler) {
+//        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+//        interceptor.addInnerInterceptor(
+//            new DataScopeInnerInterceptor(dataScopeHandler)
+//        );
+//        return interceptor;
+//    }
+//}
