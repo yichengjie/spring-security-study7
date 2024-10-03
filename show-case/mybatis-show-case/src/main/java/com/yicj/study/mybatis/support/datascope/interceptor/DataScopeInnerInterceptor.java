@@ -95,7 +95,7 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
     /**
      * 处理sqlBody
      */
-    protected void processSelectBody(SelectBody selectBody) {
+    protected void processSelectBody(Select selectBody) {
         if (selectBody == null) {
             return;
         }
@@ -106,11 +106,11 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
             // With关键字
             WithItem withItem = (WithItem) selectBody;
             // jsqlparser 4.3版本 使用 {@code withItem.getSubSelect().getSelectBody())} 代替 {@code withItem.getSelectBody()}
-            processSelectBody(withItem.getSubSelect().getSelectBody());
+            processSelectBody(withItem.getSelect().getSelectBody());
         } else {
             // 集合操作 UNION(并集) MINUS(差集)
             SetOperationList operationList = (SetOperationList) selectBody;
-            List<SelectBody> selectBodyList = operationList.getSelects();
+            List<Select> selectBodyList = operationList.getSelects();
             if (CollectionUtils.isNotEmpty(selectBodyList)) {
                 selectBodyList.forEach(this::processSelectBody);
             }

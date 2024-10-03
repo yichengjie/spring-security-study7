@@ -6,7 +6,6 @@ import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.select.PlainSelect;
 import net.sf.jsqlparser.statement.select.Select;
-import net.sf.jsqlparser.statement.select.SelectBody;
 import net.sf.jsqlparser.statement.select.WithItem;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -50,7 +49,7 @@ public class CCJSqlParserUtilTest {
         void selectBody(String sql) throws JSQLParserException {
             Select select = (Select) CCJSqlParserUtil.parse(sql);
             // select body
-            SelectBody selectBody = select.getSelectBody();
+            Select selectBody = select.getSelectBody();
             log.info("selectBody: {}", selectBody);
             // with items
             List<WithItem> withItemsList = select.getWithItemsList();
@@ -70,7 +69,7 @@ public class CCJSqlParserUtilTest {
             String SQL003="WITH t AS ( SELECT * FROM user WHERE user.user_name = 'test' ) SELECT t.* FROM t";
             Select select = (Select) CCJSqlParserUtil.parse(SQL003);
             //
-            SelectBody selectBody = select.getSelectBody();
+            Select selectBody = select.getSelectBody();
             log.info("selectBody: {}", selectBody);
             // with items
             List<WithItem> withItemsList = select.getWithItemsList();

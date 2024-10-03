@@ -29,7 +29,7 @@ class CCJSqlParserManagerTest {
         //-------------------------------------------//
         Select selectStatement = (Select) statement;
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
-        List<String> tableList = tablesNamesFinder.getTableList(selectStatement);
+        List<String> tableList = tablesNamesFinder.getTableList(statement);
         for (Iterator<String> iter = tableList.iterator(); iter.hasNext();) {
             System.out.println("===> table name : " + iter.next());
         }
@@ -47,7 +47,7 @@ class CCJSqlParserManagerTest {
         //-------------------------------------------//
         Select selectStatement = (Select) statement;
         TablesNamesFinder tablesNamesFinder = new TablesNamesFinder();
-        List<String> tableList = tablesNamesFinder.getTableList(selectStatement);
+        List<String> tableList = tablesNamesFinder.getTableList(statement);
         for (Iterator<String> iter = tableList.iterator(); iter.hasNext();) {
             System.out.println("===> table name : " + iter.next());
         }
