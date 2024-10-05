@@ -48,7 +48,7 @@ public class DefaultSecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                .requestMatchers("/login").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
