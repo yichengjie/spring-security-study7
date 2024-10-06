@@ -44,6 +44,7 @@
         <module>springdoc-show-case</module>
         <module>cache-show-case</module>
         <module>elasticsearch-show-case</module>
+        <module>druid-show-case</module>
     </modules>
 
 
