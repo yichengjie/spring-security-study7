@@ -3,8 +3,10 @@ package com.yicj.study.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -56,6 +58,13 @@ public class HelloController {
     public String other(){
 
         return "hello other" ;
+    }
+
+    @GetMapping("/401")
+    @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+    public String test(){
+
+        return "hello 401" ;
     }
 
 }

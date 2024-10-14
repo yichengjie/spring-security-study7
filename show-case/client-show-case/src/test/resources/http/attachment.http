@@ -1,0 +1,12 @@
+### 单挑删除
+DELETE http://127.0.0.1:8081/attachment/attachments/1
+
+
+
+### 批量删除
+DELETE http://127.0.0.1:8081/attachment/attachments/batch
+Content-Type: application/json
+
+{
+    "ids": ["1", "2"]
+}
