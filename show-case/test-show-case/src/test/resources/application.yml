@@ -1,0 +1,27 @@
+--- # datasource配置
+spring:
+  datasource:
+    url: jdbc:h2:mem:test;MODE=mysql;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+logging:
+  level:
+    root: info
+    com.yicj.study.case.mapper: debug
+# mybatis-plus配置
+mybatis-plus:
+  type-aliases-package: com.yicj.study.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+--- # flyway配置
+spring:
+  flyway:
+    enabled: true                        #开启flyway功能，默认为true
+    baseline-on-migrate: true            # 当迁移数据库存在但没有元数据的表时，自动执行基准迁移，新建flyway_schema_history表
+    clean-on-validation-error: false
+    locations: classpath:db/migration    # 数据库迁移脚本的位置，默认为classpath:db/migration
+    encoding: UTF-8                      # 迁移脚本编码，默认为UTF-8
+    table: flyway_schema_history         # 用于存储迁移历史记录的表名，默认为flyway_schema_history
+    sql-migration-prefix: V              # SQL迁移脚本文件名前缀，默认为V
+    sql-migration-suffixes: .sql         # SQL迁移脚本文件名后缀，默认为.sql

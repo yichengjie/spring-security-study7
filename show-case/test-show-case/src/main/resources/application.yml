@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/study?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&rewriteBatchedStatements=true
+logging:
+  level:
+    root: info
+    com.yicj.study.case.mapper: debug
+
+# mybatis-plus配置
+mybatis-plus:
+  type-aliases-package: com.yicj.study.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+---
+spring:
+  flyway:
+    # 启用或禁用 flyway
+    enabled: false

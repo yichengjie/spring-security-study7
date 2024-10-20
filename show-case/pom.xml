@@ -46,6 +46,7 @@
         <module>elasticsearch-show-case</module>
         <module>druid-show-case</module>
         <module>restdocs-show-case</module>
+        <module>test-show-case</module>
     </modules>
 
 
